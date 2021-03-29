@@ -1,0 +1,15 @@
+.textarea-field {
+  display: block;
+
+  &__label {
+    display: block;
+    font-size: 22px;
+  }
+
+  .textarea {
+    display: block;
+    width: 100%;
+    min-height: 120px;
+    resize: none;
+  }
+}

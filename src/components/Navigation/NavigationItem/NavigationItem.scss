@@ -2,9 +2,14 @@
   margin: 0 0 0 20px;
   font-size: 20px;
   text-shadow: 2px 2px 5px $secondary-color;
+  border-bottom: 1px solid transparent;
   transition: all 0.3s ease 0s;
 
   &:hover {
     color: $text-color-lightest;
+  }
+
+  &.active {
+    border-bottom: 1px solid $text-color-lightest;
   }
 }

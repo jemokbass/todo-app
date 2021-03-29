@@ -10,8 +10,9 @@ import App from '@src/assets/App/App';
 import 'formbase';
 import 'normalize.css';
 import '@src/assets/styles/index.scss';
+import todoReducer from './store/reducers/todoReducer';
 const rootReducer = combineReducers({
-  res: '',
+  todo: todoReducer,
 });
 
 const store = createStore(rootReducer, compose(applyMiddleware(thunk)));

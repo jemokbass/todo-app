@@ -5,8 +5,8 @@ const Textarea = ({ value, onChange, label, className }) => {
   className = className ? ` ${className}` : '';
 
   return (
-    <label className="label">
-      <span className="textarea-label">{label}</span>
+    <label className="label textarea-field">
+      <span className="textarea-field__label">{label}</span>
       <textarea className={`textarea${className}`} onChange={onChange} value={value} />
     </label>
   );

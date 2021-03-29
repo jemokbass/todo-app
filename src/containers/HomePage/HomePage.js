@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   return (
-    <div className="home-page">
+    <div className="homepage">
       <div className="container">
-        <h1 className="home-page__title">Welcome to the Todo App.</h1>
-        <Link className="home-page__link" to="new-todo">
+        <h1 className="homepage__title">Welcome to the Todo App.</h1>
+        <Link className="homepage__link" to="new-todo">
           Write First Todo
         </Link>
       </div>

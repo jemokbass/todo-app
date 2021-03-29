@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Layout from '@src/components/Layout/Layout';
-import Routes from './routes';
+import Routes from './Routes';
 
 const App = props => {
   return (

@@ -1,41 +1,15 @@
-import React, { lazy, Suspense } from 'react';
+import { lazy } from 'react';
 
-import Loader from '@src/components/Loader/Loader';
-import NewTodoPage from '@src/containers/NewTodoPage/NewTodoPage';
-import SignInPage from '@src/containers/SignInPage/SignInPage';
-import SignUpPage from '@src/containers/SignUpPage/SignUpPage';
-import TodoListPage from '@src/containers/TodoListPage/TodoListPage';
+const singInPage = lazy(() => import('@src/containers/SignInPage/SignInPage'));
+const singUpPage = lazy(() => import('@src/containers/SignUpPage/SignUpPage'));
+const newTodoPage = lazy(() => import('@src/containers/NewTodoPage/NewTodoPage'));
+const todoListPage = lazy(() => import('@src/containers/TodoListPage/TodoListPage'));
 
-const fallback = <Loader />;
+const lazyLoad = {
+  singInPage,
+  singUpPage,
+  newTodoPage,
+  todoListPage,
+};
 
-export const singInPage = (
-  <Suspense fallback={fallback}>
-    {lazy(() => (
-      <SignInPage />
-    ))}
-  </Suspense>
-);
-
-export const singUpPage = (
-  <Suspense fallback={fallback}>
-    {lazy(() => (
-      <SignUpPage />
-    ))}
-  </Suspense>
-);
-
-export const newTodoPage = (
-  <Suspense fallback={fallback}>
-    {lazy(() => (
-      <NewTodoPage />
-    ))}
-  </Suspense>
-);
-
-export const todoListPage = (
-  <Suspense fallback={fallback}>
-    {lazy(() => (
-      <TodoListPage />
-    ))}
-  </Suspense>
-);
+export default lazyLoad;
