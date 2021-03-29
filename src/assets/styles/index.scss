@@ -1,2 +1,19 @@
+@import './fonts';
 @import './vars';
 @import './main';
+
+//BLOCKS
+@import '../../components/Layout/Header/Header';
+@import '../../components/Layout/Footer/Footer';
+@import '../../components/Navigation/NavigationItem/NavigationItem';
+
+//COMPONENTS
+@import '../../components/Layout/Layout';
+@import '../../components/Logo/Logo';
+@import '../../components/Navigation/Navigation';
+@import '../../components/Loader/Loader';
+
+//CONTAINERS
+@import '../../containers/HomePage/HomePage';
+@import '../../containers/SignInPage/SignInPage';
+@import '../../containers/SignUpPage/SignUpPage';
