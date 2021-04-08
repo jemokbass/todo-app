@@ -12,4 +12,8 @@
     min-height: 120px;
     resize: none;
   }
+
+  .textarea[disabled] {
+    opacity: 0.6;
+  }
 }

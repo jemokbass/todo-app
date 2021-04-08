@@ -11,6 +11,10 @@
     margin: 0 0 5px;
   }
 
+  .input[disabled] {
+    opacity: 0.6;
+  }
+
   &__error {
     color: rgb(158, 20, 20);
   }

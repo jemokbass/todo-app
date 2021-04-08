@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import Loader from '@src/components/Loader/Loader';
 import HomePage from '@src/containers/HomePage/HomePage';
@@ -11,10 +11,12 @@ const Routes = props => {
   return (
     <>
       <Suspense fallback={fallback}>
-        <Route path="/todo-list" component={lazyLoad.todoListPage} />
-        <Route path="/new-todo" component={lazyLoad.newTodoPage} />
-        <Route path="/sign-up" component={lazyLoad.singUpPage} />
-        <Route path="/sign-in" component={lazyLoad.singInPage} />
+        <Switch>
+          <Route path="/todo-list" component={lazyLoad.todoListPage} />
+          <Route path="/new-todo" component={lazyLoad.newTodoPage} />
+          <Route exact path="/sign-up" component={lazyLoad.singUpPage} />
+          <Route exact path="/sign-in" component={lazyLoad.singInPage} />
+        </Switch>
       </Suspense>
       <Route exact path="/" component={HomePage} />
       <Redirect to="/" />

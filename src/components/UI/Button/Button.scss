@@ -15,3 +15,13 @@
     background: $element-color-darkest;
   }
 }
+
+.button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+
+  &:hover {
+    color: $main-color;
+    background: $element-color-lightest;
+  }
+}

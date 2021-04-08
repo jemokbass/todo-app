@@ -7,11 +7,13 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SIGN_UP_START:
+    case actionTypes.AUTH_START:
       return { ...state, loading: true };
     case actionTypes.SIGN_UP_SUCCESS:
       return { ...state, error: null, loading: false };
-    case actionTypes.SIGN_UP_ERROR:
+    case actionTypes.SIGN_IN_SUCCESS:
+      return { ...state };
+    case actionTypes.AUTH_ERROR:
       return { ...state, error: action.error, loading: false };
     default:
       return state;
