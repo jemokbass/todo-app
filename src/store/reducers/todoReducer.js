@@ -21,13 +21,11 @@ const newTodoReducer = (state = initialState, action) => {
     case actionTypes.FETCH_TODO_ERROR:
       return { ...state, loading: false, error: action.error };
     case actionTypes.REMOVE_TODO_START:
-      return { ...state };
+      return { ...state, loading: true, error: null };
     case actionTypes.REMOVE_TODO_SUCCESS:
-      const prevState = { ...state };
-      const newState = prevState.todo.filter(el => el !== action.id);
-      return { ...state, todo: newState };
+      return { ...state, loading: false, error: null };
     case actionTypes.REMOVE_TODO_ERROR:
-      return { ...state };
+      return { ...state, loading: false, error: action.error };
     default:
       return state;
   }

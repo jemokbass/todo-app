@@ -1,5 +1,5 @@
 import Loader from '@src/components/Loader/Loader';
-import { fetchTodo, removeTodo } from '@src/store/actions/todoAction';
+import { fetchTodo, removeTodo } from '@src/store/actions/todoActions';
 import React, { memo, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TodoListItem from './TodoListItem/TodoListItem';

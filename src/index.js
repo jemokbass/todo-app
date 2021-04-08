@@ -11,8 +11,10 @@ import 'formbase';
 import 'normalize.css';
 import '@src/assets/styles/index.scss';
 import todoReducer from './store/reducers/todoReducer';
+import authReducer from './store/reducers/authReducer';
 const rootReducer = combineReducers({
   todo: todoReducer,
+  auth: authReducer,
 });
 
 const store = createStore(rootReducer, compose(applyMiddleware(thunk)));

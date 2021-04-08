@@ -1,0 +1,22 @@
+.dropbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80px;
+  background: $element-color;
+  border: 2px solid $element-color-darkest;
+  border-radius: 10px;
+}
+
+.dropbox-item {
+  display: block;
+
+  &__title {
+    font-size: 20px;
+    color: $text-color-lightest;
+  }
+
+  &__size {
+    margin: 0 0 0 20px;
+  }
+}

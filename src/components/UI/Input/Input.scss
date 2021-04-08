@@ -1,5 +1,6 @@
 .input-field {
   display: block;
+  margin: 0 0 10px;
 
   &__label {
     display: block;
@@ -7,5 +8,10 @@
   }
 
   .input {
+    margin: 0 0 5px;
+  }
+
+  &__error {
+    color: rgb(158, 20, 20);
   }
 }

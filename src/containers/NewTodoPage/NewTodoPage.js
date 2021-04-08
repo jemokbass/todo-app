@@ -5,7 +5,7 @@ import Input from '@src/components/UI/Input/Input';
 import Textarea from '@src/components/UI/Textarea/Textarea';
 import Button from '@src/components/UI/Button/Button';
 import Loader from '@src/components/Loader/Loader';
-import { todoSubmit } from '@src/store/actions/todoAction';
+import { todoSubmit } from '@src/store/actions/todoActions';
 
 const NewTodoPage = () => {
   const [titleValue, setTitleValue] = useState('');

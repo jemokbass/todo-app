@@ -67,8 +67,9 @@ export const removeTodoSuccess = id => ({
   id,
 });
 
-export const removeTodoError = () => ({
+export const removeTodoError = error => ({
   type: actionTypes.REMOVE_TODO_ERROR,
+  error,
 });
 
 export const removeTodo = id => dispatch => {
