@@ -9,8 +9,9 @@ export const signUpSuccess = () => ({
   type: actionTypes.SIGN_UP_SUCCESS,
 });
 
-export const signInSuccess = () => ({
+export const signInSuccess = token => ({
   type: actionTypes.SIGN_IN_SUCCESS,
+  token,
 });
 
 export const authError = error => ({
@@ -24,6 +25,7 @@ export const signUp = (info, auth) => dispatch => {
     .auth()
     .createUserWithEmailAndPassword(auth.email, auth.password)
     .then(result => {
+      info.uid = result.user.uid;
       const databaseRef = app.database().ref('/users');
       databaseRef
         .push(info)
@@ -45,8 +47,7 @@ export const signIn = auth => dispatch => {
     .auth()
     .signInWithEmailAndPassword(auth.email, auth.password)
     .then(result => {
-      console.log(result.data);
-      dispatch(signInSuccess());
+      dispatch(signInSuccess(result.user.refreshToken));
     })
     .catch(err => {
       dispatch(authError(err));

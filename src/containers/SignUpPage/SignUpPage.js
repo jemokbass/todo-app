@@ -37,7 +37,7 @@ const SignUpPage = props => {
 
     submitForm(info, auth);
     if (!loading && !error) {
-      setSuccessfulSubmit(true);
+      setTimeout(() => setSuccessfulSubmit(true), 3000);
     }
   };
 

@@ -18,3 +18,12 @@ export const schema = yup.object().shape({
     .matches(/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s./0-9]*$/g, 'Phone should contain numbers')
     .required('Phone is a required field'),
 });
+
+export const schemaSign = yup.object().shape({
+  email: yup.string().email('Email should have correct format').required('Email is a required field'),
+  password: yup
+    .string()
+    .min(7, 'Password should more 6 characters')
+    .max(15, 'Password should not more 15 characters')
+    .required('Password is a required field'),
+});

@@ -13,6 +13,6 @@ export const REMOVE_TODO_ERROR = 'REMOVE_TODO_ERROR';
 
 export const AUTH_START = 'SIGN_START';
 export const AUTH_ERROR = 'SIGN_ERROR';
-export const SIGN_IN_SUCCESS = 'SIGN_SUCCESS';
-export const SIGN_UP_SUCCESS = 'SIGN_SUCCESS';
+export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
+export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const LOGOUT = 'LOGOUT';
