@@ -4,6 +4,7 @@ const initialState = {
   loading: false,
   error: null,
   token: null,
+  id: null,
   isAuth: false,
 };
 
@@ -12,7 +13,7 @@ const authReducer = (state = initialState, action) => {
     case actionTypes.AUTH_START:
       return { ...state, loading: true };
     case actionTypes.SIGN_IN_SUCCESS:
-      return { ...state, error: null, loading: false, token: action.token, isAuth: true };
+      return { ...state, error: null, loading: false, token: action.token, id: action.id, isAuth: true };
     case actionTypes.SIGN_UP_SUCCESS:
       return { ...state, error: null, loading: false };
     case actionTypes.AUTH_ERROR:

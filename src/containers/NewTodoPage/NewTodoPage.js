@@ -1,5 +1,8 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { schemaNewTodo } from '@src/shared/schema';
 
 import Input from '@src/components/UI/Input/Input';
 import Textarea from '@src/components/UI/Textarea/Textarea';
@@ -8,29 +11,39 @@ import Loader from '@src/components/Loader/Loader';
 import { todoSubmit } from '@src/store/actions/todoActions';
 
 const NewTodoPage = () => {
-  const [titleValue, setTitleValue] = useState('');
-  const [textValue, setTextValue] = useState('');
   const loading = useSelector(state => state.todo.loading);
   const error = useSelector(state => state.todo.error);
+  const uid = useSelector(state => state.auth.id);
   const dispatch = useDispatch();
   const submitTodo = newTodo => dispatch(todoSubmit(newTodo));
+  const {
+    reset,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: 'onBlur', resolver: yupResolver(schemaNewTodo) });
 
-  const submitTodoHandler = event => {
-    event.preventDefault();
-
-    if (titleValue && textValue) {
-      const newTodo = { title: titleValue, text: textValue };
-      submitTodo(newTodo);
-      setTitleValue('');
-      setTextValue('');
-    }
+  const submitTodoHandler = data => {
+    const newTodo = { title: data.title, text: data.text, uid };
+    submitTodo(newTodo);
+    reset();
   };
 
   return (
     <div className="new-todo-page">
-      <form className="container" onSubmit={submitTodoHandler}>
-        <Input label="Title" value={titleValue} onChange={event => setTitleValue(event.target.value)} />
-        <Textarea label="Text" value={textValue} onChange={event => setTextValue(event.target.value)} />
+      <form className="container" onSubmit={handleSubmit(submitTodoHandler)}>
+        <Input
+          label="Title"
+          errors={!!errors.title}
+          errorsMessage={errors?.title?.message}
+          {...register('title')}
+        />
+        <Textarea
+          label="Text"
+          errors={!!errors.text}
+          errorsMessage={errors?.text?.message}
+          {...register('text')}
+        />
         {loading && <Loader />}
         <Button className="new-todo-page__button" type="submit">
           Send

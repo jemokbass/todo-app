@@ -27,3 +27,8 @@ export const schemaSign = yup.object().shape({
     .max(15, 'Password should not more 15 characters')
     .required('Password is a required field'),
 });
+
+export const schemaNewTodo = yup.object().shape({
+  title: yup.string().required('Title is a required field'),
+  text: yup.string().required('Text is a required field'),
+});

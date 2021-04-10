@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,6 +8,7 @@ import Input from '@src/components/UI/Input/Input';
 import Button from '@src/components/UI/Button/Button';
 import Loader from '@src/components/Loader/Loader';
 import { signIn } from '@src/store/actions/authActions';
+import { Redirect } from 'react-router';
 
 const SignInPage = props => {
   const loading = useSelector(state => state.auth.loading);
@@ -19,9 +20,14 @@ const SignInPage = props => {
     handleSubmit,
     formState: { errors },
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schemaSign) });
+  const [successfulSubmit, setSuccessfulSubmit] = useState(false);
 
   const submitSignInHandler = data => {
     submitForm(data);
+
+    if (!loading) {
+      setTimeout(() => setSuccessfulSubmit(true), 3000);
+    }
   };
 
   return (
@@ -50,8 +56,9 @@ const SignInPage = props => {
         </Button>
         {error && <p>{error.message}</p>}
       </form>
+      {successfulSubmit && <Redirect to="/" />}
     </div>
   );
 };
 
-export default SignInPage;
+export default memo(SignInPage);

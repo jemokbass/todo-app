@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -36,7 +36,7 @@ const SignUpPage = props => {
     const auth = { email: data.email, password: data.password };
 
     submitForm(info, auth);
-    if (!loading && !error) {
+    if (!loading) {
       setTimeout(() => setSuccessfulSubmit(true), 3000);
     }
   };
@@ -90,4 +90,4 @@ const SignUpPage = props => {
   );
 };
 
-export default SignUpPage;
+export default memo(SignUpPage);

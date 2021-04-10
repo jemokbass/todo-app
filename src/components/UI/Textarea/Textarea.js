@@ -2,7 +2,18 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 const Textarea = forwardRef((props, ref) => {
-  const { autoCorrect, autoComplete, onBlur, onChange, label, disabled, name, className } = props;
+  const {
+    autoCorrect,
+    autoComplete,
+    onBlur,
+    onChange,
+    label,
+    disabled,
+    name,
+    className,
+    errors,
+    errorsMessage,
+  } = props;
   const textareaClassName = className ? ` ${className}` : '';
 
   return (
@@ -18,6 +29,7 @@ const Textarea = forwardRef((props, ref) => {
         disabled={disabled}
         name={name}
       />
+      {errors && <span className="input-field__error">{errorsMessage}</span>}
     </label>
   );
 });

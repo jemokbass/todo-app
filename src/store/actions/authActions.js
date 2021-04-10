@@ -9,9 +9,10 @@ export const signUpSuccess = () => ({
   type: actionTypes.SIGN_UP_SUCCESS,
 });
 
-export const signInSuccess = token => ({
+export const signInSuccess = (token, id) => ({
   type: actionTypes.SIGN_IN_SUCCESS,
   token,
+  id,
 });
 
 export const authError = error => ({
@@ -47,7 +48,8 @@ export const signIn = auth => dispatch => {
     .auth()
     .signInWithEmailAndPassword(auth.email, auth.password)
     .then(result => {
-      dispatch(signInSuccess(result.user.refreshToken));
+      const token = app.auth().currentUser.getIdToken();
+      dispatch(signInSuccess(token, result.user.uid));
     })
     .catch(err => {
       dispatch(authError(err));

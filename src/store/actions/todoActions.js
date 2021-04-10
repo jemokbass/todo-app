@@ -1,5 +1,5 @@
-import axios from '@src/assets/App/axios';
 import * as actionTypes from './actionTypes';
+import app from '@src/firebase';
 
 export const todoSubmitStart = () => ({
   type: actionTypes.TODO_SUBMIT_START,
@@ -17,8 +17,10 @@ export const todoSubmitError = err => ({
 
 export const todoSubmit = newTodo => dispatch => {
   dispatch(todoSubmitStart());
-  axios
-    .post(`https://todo-app-9d8dc-default-rtdb.firebaseio.com/todo.json`, newTodo)
+  app
+    .database()
+    .ref('/todo')
+    .push(newTodo)
     .then(result => {
       dispatch(todoSubmitSuccess(result.data));
       dispatch(todoSubmitSuccess([]));
@@ -44,8 +46,10 @@ export const fetchTodoError = err => ({
 
 export const fetchTodo = () => dispatch => {
   dispatch(fetchTodoStart());
-  axios
-    .get(`https://todo-app-9d8dc-default-rtdb.firebaseio.com/todo.json`)
+  app
+    .database()
+    .ref('/todo')
+    .get()
     .then(result => {
       const todoList = [];
       for (let key in result.data) {
@@ -62,9 +66,8 @@ export const removeTodoStart = () => ({
   type: actionTypes.REMOVE_TODO_START,
 });
 
-export const removeTodoSuccess = id => ({
+export const removeTodoSuccess = () => ({
   type: actionTypes.FETCH_TODO_SUCCESS,
-  id,
 });
 
 export const removeTodoError = error => ({
@@ -74,10 +77,12 @@ export const removeTodoError = error => ({
 
 export const removeTodo = id => dispatch => {
   dispatch(removeTodoStart());
-  axios
-    .delete(`https://todo-app-9d8dc-default-rtdb.firebaseio.com/todo/${id}.json`)
+  app
+    .database()
+    .ref(`/todo/${id}`)
+    .remove()
     .then(result => {
-      dispatch(removeTodoSuccess(id));
+      dispatch(removeTodoSuccess());
       dispatch(fetchTodo());
     })
     .catch(err => {
