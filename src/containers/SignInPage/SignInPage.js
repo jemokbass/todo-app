@@ -2,32 +2,29 @@ import React, { memo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Redirect } from 'react-router';
 import { schemaSign } from '@src/shared/schema';
 
 import Input from '@src/components/UI/Input/Input';
 import Button from '@src/components/UI/Button/Button';
 import Loader from '@src/components/Loader/Loader';
 import { signIn } from '@src/store/actions/authActions';
-import { Redirect } from 'react-router';
 
 const SignInPage = props => {
   const loading = useSelector(state => state.auth.loading);
   const error = useSelector(state => state.auth.error);
   const dispatch = useDispatch();
   const submitForm = auth => dispatch(signIn(auth));
+  const [successfulSubmit, setSuccessfulSubmit] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schemaSign) });
-  const [successfulSubmit, setSuccessfulSubmit] = useState(false);
 
   const submitSignInHandler = data => {
     submitForm(data);
-
-    if (!loading) {
-      setTimeout(() => setSuccessfulSubmit(true), 3000);
-    }
+    setSuccessfulSubmit(true);
   };
 
   return (

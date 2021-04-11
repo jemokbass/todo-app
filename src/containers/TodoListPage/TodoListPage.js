@@ -11,12 +11,14 @@ const TodoListPage = () => {
   const errorItem = useSelector(state => state.todo.errorItem);
   const todoList = useSelector(state => state.todo.todo);
   const dispatch = useDispatch();
-  const fetchTodoList = useCallback(() => dispatch(fetchTodo()), [dispatch]);
+  const fetchTodoList = useCallback((token, uid) => dispatch(fetchTodo(token, uid)), [dispatch]);
   const removeTodoItem = useCallback(id => dispatch(removeTodo(id)), [dispatch]);
+  const uid = useSelector(state => state.auth.id);
+  const token = useSelector(state => state.auth.token);
 
   useEffect(() => {
-    fetchTodoList();
-  }, [fetchTodoList]);
+    fetchTodoList(token, uid);
+  }, [fetchTodoList, token, uid]);
 
   const removeTodoHandler = useCallback(
     id => {

@@ -44,11 +44,13 @@ export const fetchTodoError = err => ({
   error: err,
 });
 
-export const fetchTodo = () => dispatch => {
+export const fetchTodo = (token, uid) => dispatch => {
   dispatch(fetchTodoStart());
   app
     .database()
-    .ref('/todo')
+    .ref('todo/')
+    .orderByChild('uid')
+    .equalTo(uid)
     .get()
     .then(result => {
       const todoList = [];

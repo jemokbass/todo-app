@@ -27,8 +27,9 @@ export const signUp = (info, auth) => dispatch => {
     .createUserWithEmailAndPassword(auth.email, auth.password)
     .then(result => {
       info.uid = result.user.uid;
-      const databaseRef = app.database().ref('/users');
-      databaseRef
+      app
+        .database()
+        .ref('/users')
         .push(info)
         .then(result => {
           dispatch(signUpSuccess());
@@ -48,14 +49,30 @@ export const signIn = auth => dispatch => {
     .auth()
     .signInWithEmailAndPassword(auth.email, auth.password)
     .then(result => {
-      const token = app.auth().currentUser.getIdToken();
-      dispatch(signInSuccess(token, result.user.uid));
+      localStorage.setItem('token', result.user.za);
+      localStorage.setItem('id', result.user.uid);
+
+      dispatch(signInSuccess(result.user.za, result.user.uid));
     })
     .catch(err => {
       dispatch(authError(err));
     });
 };
 
-export const logout = () => ({
-  type: actionTypes.LOGOUT,
-});
+export const checkLogin = () => dispatch => {
+  const token = localStorage.getItem('token');
+  const id = localStorage.getItem('id');
+
+  if (!token) {
+    dispatch(logout());
+  } else dispatch(signInSuccess(token, id));
+};
+
+export const logout = () => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('id');
+
+  return {
+    type: actionTypes.LOGOUT,
+  };
+};
