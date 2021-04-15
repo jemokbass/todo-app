@@ -44,23 +44,19 @@ export const fetchTodoError = err => ({
   error: err,
 });
 
-export const fetchTodo = (token, uid) => dispatch => {
+export const fetchTodo = uid => dispatch => {
   dispatch(fetchTodoStart());
   app
     .database()
     .ref('todo/')
     .orderByChild('uid')
     .equalTo(uid)
-    .get()
-    .then(result => {
-      const todoList = [];
-      for (let key in result.data) {
-        todoList.push({ ...result.data[key], id: key });
+    .on('value', snapshot => {
+      if (snapshot.exists()) {
+        dispatch(fetchTodoSuccess(Object.entries(snapshot.val())));
+      } else {
+        dispatch(fetchTodoError({ errorMessage: 'Error' }));
       }
-      dispatch(fetchTodoSuccess(todoList));
-    })
-    .catch(err => {
-      dispatch(fetchTodoError(err));
     });
 };
 
@@ -69,7 +65,7 @@ export const removeTodoStart = () => ({
 });
 
 export const removeTodoSuccess = () => ({
-  type: actionTypes.FETCH_TODO_SUCCESS,
+  type: actionTypes.REMOVE_TODO_SUCCESS,
 });
 
 export const removeTodoError = error => ({
@@ -81,11 +77,11 @@ export const removeTodo = id => dispatch => {
   dispatch(removeTodoStart());
   app
     .database()
-    .ref(`/todo/${id}`)
+    .ref('/todo')
+    .child(`/${id}`)
     .remove()
     .then(result => {
       dispatch(removeTodoSuccess());
-      dispatch(fetchTodo());
     })
     .catch(err => {
       dispatch(removeTodoError(err));
