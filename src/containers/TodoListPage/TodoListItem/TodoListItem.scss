@@ -6,7 +6,7 @@
   padding: 10px 0 0;
   background: $secondary-color-lightest;
   border-radius: 8px;
-  box-shadow: 3px 3px 0 5px rgba($color: $secondary-color, $alpha: 0.7);
+  box-shadow: 3px 3px 0 5px $secondary-color;
 
   &__title {
     margin: 0 0 25px;

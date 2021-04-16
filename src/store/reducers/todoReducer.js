@@ -11,7 +11,7 @@ const newTodoReducer = (state = initialState, action) => {
     case actionTypes.TODO_SUBMIT_START:
       return { ...state, error: null, loading: true };
     case actionTypes.TODO_SUBMIT_SUCCESS:
-      return { ...state, loading: false, todo: action.result };
+      return { ...state, loading: false, error: false };
     case actionTypes.TODO_SUBMIT_ERROR:
       return { ...state, loading: false, error: action.error };
     case actionTypes.FETCH_TODO_START:

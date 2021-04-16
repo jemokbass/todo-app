@@ -37,6 +37,7 @@ const Textarea = forwardRef((props, ref) => {
 Textarea.defaultProps = {
   label: '',
   onChange: () => {},
+  onBlur: () => {},
   autoComplete: 'on',
   autoCorrect: 'on',
   disabled: false,
@@ -46,6 +47,7 @@ Textarea.defaultProps = {
 Textarea.propTypes = {
   label: PropTypes.string,
   onChange: PropTypes.func,
+  onBlur: PropTypes.func,
   autoComplete: PropTypes.oneOf(['off', 'on']),
   autoCorrect: PropTypes.oneOf(['off', 'on']),
   disabled: PropTypes.bool,

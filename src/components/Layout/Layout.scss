@@ -1,6 +1,7 @@
 .layout {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  background: rgba($color: $basic-color-darkest, $alpha: 0.9);
+  min-height: 100%;
+  background: $basic-color-darkest;
+  transition: all 0.5s ease-in-out 0s;
 }

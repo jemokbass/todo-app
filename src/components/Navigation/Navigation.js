@@ -15,6 +15,7 @@ const Navigation = () => {
       { title: 'Home', to: '/', exact: true },
       { title: 'Todo List', to: '/todo-list' },
       { title: 'New Todo', to: '/new-todo' },
+      { title: 'Options', to: '/options' },
       { title: 'Logout', to: '/logout' },
     ];
   }

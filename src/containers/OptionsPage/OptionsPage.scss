@@ -1,4 +1,4 @@
-.sign-in-page {
+.options-page {
   padding: 30px 0 0;
 
   &__title {
@@ -11,7 +11,14 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background: $element-color-lightest;
+    background: $main-color-lightest;
     box-shadow: -2px 2px 0 $secondary-color-lightest;
+
+    &-button.button {
+      max-width: 30px;
+      margin: 0 0 20px;
+      padding: 3px 5px;
+      border-radius: 3px;
+    }
   }
 }

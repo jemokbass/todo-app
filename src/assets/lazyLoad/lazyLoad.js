@@ -5,6 +5,7 @@ const singUpPage = lazy(() => import('@src/containers/SignUpPage/SignUpPage'));
 const newTodoPage = lazy(() => import('@src/containers/NewTodoPage/NewTodoPage'));
 const todoListPage = lazy(() => import('@src/containers/TodoListPage/TodoListPage'));
 const logout = lazy(() => import('@src/containers/Logout/Logout'));
+const optionsPage = lazy(() => import('@src/containers/OptionsPage/OptionsPage'));
 
 const lazyLoad = {
   singInPage,
@@ -12,6 +13,7 @@ const lazyLoad = {
   newTodoPage,
   todoListPage,
   logout,
+  optionsPage,
 };
 
 export default lazyLoad;

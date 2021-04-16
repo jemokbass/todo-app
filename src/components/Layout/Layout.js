@@ -4,7 +4,7 @@ import Header from './Header/Header';
 
 const Layout = ({ children }) => {
   return (
-    <div className="layout">
+    <div className="layout dark">
       <Header />
       <main className="main">{children}</main>
       <Footer />
