@@ -19,6 +19,12 @@
       margin: 0 0 20px;
       padding: 3px 5px;
       border-radius: 3px;
+
+      svg {
+        width: 20px;
+        height: 12px;
+        transform: rotate(180deg);
+      }
     }
   }
 }

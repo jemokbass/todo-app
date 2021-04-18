@@ -20,6 +20,11 @@ export const authError = error => ({
   error,
 });
 
+export const getUserInfo = info => ({
+  type: actionTypes.GET_USER_INFO,
+  info,
+});
+
 export const signUp = (info, auth) => dispatch => {
   dispatch(authStart());
   app
@@ -59,13 +64,42 @@ export const signIn = auth => dispatch => {
     });
 };
 
+const checkUserInfo = () => {
+  const uid = localStorage.getItem('id');
+  return new Promise((resolve, reject) => {
+    app
+      .database()
+      .ref('users/')
+      .orderByChild('uid')
+      .equalTo(uid)
+      .on('value', snapshot => {
+        if (snapshot.exists()) {
+          return resolve(snapshot.val());
+        } else reject('error');
+      });
+  });
+};
+
+export const startInfoResponse = () => ({
+  type: actionTypes.START_INFO_RESPONSE,
+});
+
 export const checkLogin = () => dispatch => {
   const token = localStorage.getItem('token');
   const id = localStorage.getItem('id');
+  dispatch(startInfoResponse());
 
   if (!token) {
     dispatch(logout());
-  } else dispatch(signInSuccess(token, id));
+  } else {
+    dispatch(signInSuccess(token, id));
+
+    checkUserInfo()
+      .then(res => {
+        dispatch(getUserInfo(res));
+      })
+      .catch(err => 'error');
+  }
 };
 
 export const logout = () => {

@@ -32,7 +32,7 @@ const SignUpPage = props => {
   };
 
   const submitSignUpHandler = data => {
-    const info = { name: data.name, phone: data.phone };
+    const info = { name: data.name, phone: data.phone, theme: 'standard' };
     const auth = { email: data.email, password: data.password };
 
     submitForm(info, auth);

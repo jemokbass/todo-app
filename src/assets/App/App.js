@@ -1,11 +1,13 @@
 import React, { useCallback, useEffect } from 'react';
-
-import Layout from '@src/components/Layout/Layout';
-import Routes from './Routes';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { checkLogin } from '@src/store/actions/authActions';
 
+import Routes from './Routes';
+import Layout from '@src/components/Layout/Layout';
+import Loader from '@src/components/Loader/Loader';
+
 const App = props => {
+  const isGetResponse = useSelector(state => state.auth.getResponse);
   const dispatch = useDispatch();
   const autoSignIn = useCallback(() => dispatch(checkLogin()), [dispatch]);
 
@@ -13,7 +15,9 @@ const App = props => {
     autoSignIn();
   }, [autoSignIn]);
 
-  return (
+  return isGetResponse ? (
+    <Loader />
+  ) : (
     <Layout>
       <Routes />
     </Layout>

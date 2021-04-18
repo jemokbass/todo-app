@@ -4,17 +4,22 @@ import { useHistory } from 'react-router';
 import Button from '@src/components/UI/Button/Button';
 import Input from '@src/components/UI/Input/Input';
 import Checkbox from '@src/components/UI/Checkbox/Checkbox';
+import { ReactComponent as ArrowSvg } from '@src/assets/img/arrow.svg';
+import Select from '@src/components/UI/Select/Select';
+import { useSelector } from 'react-redux';
 
 const OptionsPage = () => {
   const history = useHistory();
   const [withPassword, setWithPassword] = useState(false);
+  const userInfo = useSelector(state => state.auth.userInfo);
+  console.log(userInfo);
 
   return (
     <div className="options-page">
       <h2 className="options-page__title">Options</h2>
       <div className="options-page__form">
         <Button className="options-page__form-button" onClick={() => history.goBack()}>
-          {'<'}
+          <ArrowSvg />
         </Button>
         {withPassword && (
           <>
@@ -30,6 +35,7 @@ const OptionsPage = () => {
             setWithPassword(prevState => !prevState);
           }}
         />
+        <Select />
         <Button>Save changes</Button>
       </div>
     </div>

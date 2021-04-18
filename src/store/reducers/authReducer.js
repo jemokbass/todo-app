@@ -7,6 +7,8 @@ const initialState = {
   id: null,
   isAuth: false,
   successfulSignUp: false,
+  userInfo: null,
+  getResponse: true,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -19,8 +21,13 @@ const authReducer = (state = initialState, action) => {
       return { ...state, error: null, loading: false, successfulSignUp: true };
     case actionTypes.AUTH_ERROR:
       return { ...state, error: action.error, loading: false };
+    case actionTypes.START_INFO_RESPONSE:
+      return { ...state, getResponse: true };
     case actionTypes.LOGOUT:
-      return { ...state, token: null, id: null, isAuth: false };
+      return { ...state, token: null, id: null, isAuth: false, getResponse: false };
+    case actionTypes.GET_USER_INFO:
+      const userInfo = action.info[Object.keys(action.info)[0]];
+      return { ...state, userInfo, getResponse: false };
     default:
       return state;
   }

@@ -16,3 +16,5 @@ export const AUTH_ERROR = 'SIGN_ERROR';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const LOGOUT = 'LOGOUT';
+export const GET_USER_INFO = 'GET_USER_INFO';
+export const START_INFO_RESPONSE = 'START_INFO_RESPONSE';
