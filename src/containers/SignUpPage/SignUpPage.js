@@ -2,7 +2,7 @@ import React, { memo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schema } from '@src/shared/schema';
+import { schemaSignUp } from '@src/shared/schema';
 import parsePhoneNumberFromString from 'libphonenumber-js';
 
 import Input from '@src/components/UI/Input/Input';
@@ -20,7 +20,7 @@ const SignUpPage = props => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: 'onBlur', resolver: yupResolver(schema) });
+  } = useForm({ mode: 'onBlur', resolver: yupResolver(schemaSignUp) });
   const [successfulSubmit, setSuccessfulSubmit] = useState(false);
 
   const normalizePhoneNumber = value => {

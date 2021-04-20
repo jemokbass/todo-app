@@ -1,3 +1,9 @@
+.select-field {
+  &__error {
+    color: rgb(158, 20, 20);
+  }
+}
+
 .react-select {
   margin: 0 0 20px;
 

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Redirect } from 'react-router';
-import { schemaSign } from '@src/shared/schema';
+import { schemaSignIn } from '@src/shared/schema';
 
 import Input from '@src/components/UI/Input/Input';
 import Button from '@src/components/UI/Button/Button';
@@ -20,7 +20,7 @@ const SignInPage = props => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: 'onBlur', resolver: yupResolver(schemaSign) });
+  } = useForm({ mode: 'onBlur', resolver: yupResolver(schemaSignIn) });
 
   const submitSignInHandler = data => {
     submitForm(data);

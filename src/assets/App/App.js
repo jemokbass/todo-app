@@ -16,7 +16,7 @@ const App = props => {
   }, [autoSignIn]);
 
   return isGetResponse ? (
-    <Loader />
+    <Loader className='main-loader' />
   ) : (
     <Layout>
       <Routes />
