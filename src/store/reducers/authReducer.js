@@ -9,6 +9,7 @@ const initialState = {
   successfulSignUp: false,
   userInfo: null,
   getResponse: true,
+  userKey: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -24,10 +25,19 @@ const authReducer = (state = initialState, action) => {
     case actionTypes.START_INFO_RESPONSE:
       return { ...state, getResponse: true };
     case actionTypes.LOGOUT:
-      return { ...state, token: null, id: null, isAuth: false, getResponse: false };
+      return {
+        ...state,
+        token: null,
+        id: null,
+        isAuth: false,
+        getResponse: false,
+        userInfo: null,
+        userKey: null,
+      };
     case actionTypes.GET_USER_INFO:
       const userInfo = action.info[Object.keys(action.info)[0]];
-      return { ...state, userInfo, getResponse: false };
+      const userKey = Object.keys(action.info)[0];
+      return { ...state, userInfo, getResponse: false, userKey };
     default:
       return state;
   }

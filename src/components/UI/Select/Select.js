@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
 
 const Select = props => {
-  const { className, name, disabled, errors, errorsMessage, control } = props;
+  const { className, name, disabled, errors, errorsMessage, control, defaultValue } = props;
   const options = [
     { value: 'standard', label: 'Standard' },
     { value: 'dark', label: 'Dark' },
@@ -16,7 +16,7 @@ const Select = props => {
       <Controller
         control={control}
         name={name}
-        defaultValue=""
+        defaultValue={defaultValue}
         render={({ field }) => (
           <ReactSelect
             className={`react-select${selectClassName}`}
@@ -37,6 +37,7 @@ Select.defaultProps = {
   onBlur: () => {},
   onChange: () => {},
   name: '',
+  defaultValue: '',
 };
 
 Select.propTypes = {

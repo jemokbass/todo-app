@@ -1,9 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const NavigationItem = ({ to, title, exact }) => {
+const NavigationItem = props => {
+  const { to, title, exact, className } = props;
+
   return (
-    <li>
+    <li className={className}>
       <NavLink className="navigation-item" to={to} exact={exact}>
         {title}
       </NavLink>

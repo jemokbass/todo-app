@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useHistory } from 'react-router';
-//import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaOptions } from '@src/shared/schema';
@@ -11,10 +11,19 @@ import Checkbox from '@src/components/UI/Checkbox/Checkbox';
 import Select from '@src/components/UI/Select/Select';
 import { ReactComponent as ArrowSvg } from '@src/assets/img/arrow.svg';
 import Dropbox from '@src/components/UI/Dropbox/Dropbox';
+import { useDispatch } from 'react-redux';
+import { changeAvatar, changeInfo } from '@src/store/actions/optionsActions';
+import Loader from '@src/components/Loader/Loader';
 
 const OptionsPage = () => {
   const history = useHistory();
-  //const userInfo = useSelector(state => state.auth.userInfo);
+  const dispatch = useDispatch();
+  const userInfo = useSelector(state => state.auth.userInfo);
+  const userKey = useSelector(state => state.auth.userKey);
+  const loading = useSelector(state => state.options.loading);
+  const error = useSelector(state => state.options.error);
+  const submitInfo = (userKey, data) => dispatch(changeInfo(userKey, data));
+  const submitAvatar = (userKey, data) => dispatch(changeAvatar(userKey, data));
   const {
     register,
     handleSubmit,
@@ -25,7 +34,15 @@ const OptionsPage = () => {
   const withPassword = watch('withPassword');
 
   const submitOptionsHandler = data => {
-    console.log(data);
+    if (!data.withPassword && data.avatar.length < 0) {
+      const newData = { ...userInfo, theme: data.theme };
+      submitInfo(userKey, newData);
+    }
+    if (!data.withPassword && data.avatar.length > 0) {
+      const newData = { ...userInfo, theme: data.theme, withAvatar: true };
+      submitInfo(userKey, newData);
+      submitAvatar(userKey, data);
+    }
   };
 
   return (
@@ -54,16 +71,19 @@ const OptionsPage = () => {
         )}
         <Checkbox title="Change password?" withValue {...register('withPassword')} />
         <Select
+          defaultValue={userInfo.theme}
           name="theme"
           control={control}
           errors={!!errors.theme}
           errorsMessage={errors?.theme?.message}
         />
         <Dropbox name="avatar" control={control} />
+        {loading && <Loader />}
         <Button type="submit">Save changes</Button>
+        {error && <p>error.message</p>}
       </form>
     </div>
   );
 };
 
-export default OptionsPage;
+export default memo(OptionsPage);
