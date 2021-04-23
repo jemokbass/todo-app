@@ -5,10 +5,10 @@ import Header from './Header/Header';
 
 const Layout = ({ children }) => {
   const themeSelector = useSelector(state => state.auth.userInfo);
-  let themeClass = themeSelector.theme.value;
+  let themeClass = 'standard';
 
-  if (!themeSelector) {
-    themeClass = 'standard';
+  if (themeSelector) {
+    themeClass = themeSelector.theme.value;
   }
 
   return (

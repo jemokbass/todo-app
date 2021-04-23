@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,9 +13,9 @@ import { signIn } from '@src/store/actions/authActions';
 const SignInPage = props => {
   const loading = useSelector(state => state.auth.loading);
   const error = useSelector(state => state.auth.error);
+  const isAuth = useSelector(state => state.auth.isAuth);
   const dispatch = useDispatch();
   const submitForm = auth => dispatch(signIn(auth));
-  const [successfulSubmit, setSuccessfulSubmit] = useState(false);
   const {
     register,
     handleSubmit,
@@ -24,7 +24,6 @@ const SignInPage = props => {
 
   const submitSignInHandler = data => {
     submitForm(data);
-    setSuccessfulSubmit(true);
   };
 
   return (
@@ -48,12 +47,12 @@ const SignInPage = props => {
           {...register('password')}
         />
         {loading && <Loader />}
-        <Button type="submit" disabled={loading || error}>
+        <Button type="submit" disabled={loading}>
           Sign In
         </Button>
         {error && <p>{error.message}</p>}
       </form>
-      {successfulSubmit && <Redirect to="/" />}
+      {isAuth && <Redirect to="/" />}
     </div>
   );
 };

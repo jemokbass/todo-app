@@ -1,8 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+
 import NavigationItem from './NavigationItem/NavigationItem';
 
-const Navigation = () => {
+const Navigation = props => {
+  const { isMobile, onClick } = props;
   const isAuth = useSelector(state => state.auth.isAuth);
   const userInfo = useSelector(state => state.auth.userInfo);
   let navigationItems = [
@@ -11,11 +13,11 @@ const Navigation = () => {
     { title: 'Sign Up ', to: '/sign-up' },
   ];
 
-  const avatar = userInfo.withAvatar
-    ? { to: '/', exact: true, className: 'avatar' }
-    : { title: `${userInfo.name.slice(0, 1)}`, to: '/', exact: true, className: 'avatar' };
-
   if (isAuth) {
+    const avatar = userInfo.withAvatar
+      ? { to: '/', exact: true, className: 'avatar' }
+      : { title: `${userInfo.name.slice(0, 1)}`, to: '/', exact: true, className: 'avatar' };
+
     navigationItems = [
       { title: 'Home', to: '/', exact: true },
       { title: 'Todo List', to: '/todo-list' },
@@ -37,7 +39,7 @@ const Navigation = () => {
   ));
 
   return (
-    <nav className="navigation">
+    <nav className={`navigation${isMobile ? ' mobile' : ''}`} onClick={onClick}>
       <ul>{navigationList}</ul>
     </nav>
   );
