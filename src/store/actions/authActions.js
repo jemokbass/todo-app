@@ -62,6 +62,7 @@ export const signIn = auth => dispatch => {
       localStorage.setItem('token', result.user.za);
       localStorage.setItem('id', result.user.uid);
 
+      dispatch(checkLogin());
       dispatch(signInSuccess(result.user.za, result.user.uid));
     })
     .catch(err => {

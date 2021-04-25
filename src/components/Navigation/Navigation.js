@@ -15,9 +15,15 @@ const Navigation = props => {
   ];
 
   if (isAuth) {
-    const avatar = userInfo.avatar
-      ? { to: '/', exact: true, className: 'avatar', title: <img src={avatarUrl} alt="avatar" /> }
-      : { title: `${userInfo.name.slice(0, 1)}`, to: '/', exact: true, className: 'avatar' };
+    let avatar = null;
+
+    if (userInfo.name) {
+      avatar = { title: `${userInfo?.name.slice(0, 1)}`, to: '/', exact: true, className: 'avatar' };
+    }
+
+    if (userInfo.avatar) {
+      avatar = { to: '/', exact: true, className: 'avatar', title: <img src={avatarUrl} alt="avatar" /> };
+    }
 
     navigationItems = [
       { title: 'Home', to: '/', exact: true },
