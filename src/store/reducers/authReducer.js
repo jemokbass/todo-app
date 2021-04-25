@@ -10,6 +10,7 @@ const initialState = {
   userInfo: null,
   getResponse: true,
   userKey: null,
+  avatar: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -33,11 +34,14 @@ const authReducer = (state = initialState, action) => {
         getResponse: false,
         userInfo: null,
         userKey: null,
+        avatar: null,
       };
     case actionTypes.GET_USER_INFO:
       const userInfo = action.info[Object.keys(action.info)[0]];
       const userKey = Object.keys(action.info)[0];
       return { ...state, userInfo, getResponse: false, userKey };
+    case actionTypes.GET_AVATAR:
+      return { ...state, avatar: action.avatar };
     default:
       return state;
   }

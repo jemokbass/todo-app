@@ -12,7 +12,7 @@ import Select from '@src/components/UI/Select/Select';
 import { ReactComponent as ArrowSvg } from '@src/assets/img/arrow.svg';
 import Dropbox from '@src/components/UI/Dropbox/Dropbox';
 import { useDispatch } from 'react-redux';
-import { changeAvatar, changeInfo } from '@src/store/actions/optionsActions';
+import { changeAvatar, changeInfo, deleteAvatar } from '@src/store/actions/optionsActions';
 import Loader from '@src/components/Loader/Loader';
 
 const OptionsPage = () => {
@@ -23,7 +23,8 @@ const OptionsPage = () => {
   const loading = useSelector(state => state.options.loading);
   const error = useSelector(state => state.options.error);
   const submitInfo = (userKey, data) => dispatch(changeInfo(userKey, data));
-  const submitAvatar = (userKey, data) => dispatch(changeAvatar(userKey, data));
+  const submitAvatar = (data, uid) => dispatch(changeAvatar(data, uid));
+  const deleteAvatarHandler = (uid, userInfo, userKey) => dispatch(deleteAvatar(uid, userInfo, userKey));
   const {
     register,
     handleSubmit,
@@ -39,11 +40,22 @@ const OptionsPage = () => {
       submitInfo(userKey, newData);
     }
     if (!data.withPassword && data.avatar.length > 0) {
-      const newData = { ...userInfo, theme: data.theme, withAvatar: true };
+      const newData = { ...userInfo, theme: data.theme, avatar: data.avatar[0].name };
       submitInfo(userKey, newData);
-      submitAvatar(userKey, data);
+      submitAvatar(data, userInfo.uid);
     }
   };
+
+  const avatarSection = userInfo.avatar ? (
+    <Button
+      className="options-page__delete"
+      onClick={() => deleteAvatarHandler(userInfo.uid, userInfo, userKey)}
+    >
+      Delete avatar?
+    </Button>
+  ) : (
+    <Dropbox name="avatar" control={control} />
+  );
 
   return (
     <div className="options-page">
@@ -77,7 +89,7 @@ const OptionsPage = () => {
           errors={!!errors.theme}
           errorsMessage={errors?.theme?.message}
         />
-        <Dropbox name="avatar" control={control} />
+        {avatarSection}
         {loading && <Loader />}
         <Button type="submit">Save changes</Button>
         {error && <p>error.message</p>}

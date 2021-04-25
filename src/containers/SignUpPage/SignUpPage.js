@@ -36,7 +36,7 @@ const SignUpPage = props => {
       name: data.name,
       phone: data.phone,
       theme: { value: 'standard', label: 'Standard' },
-      withAvatar: false,
+      avatar: false,
     };
     const auth = { email: data.email, password: data.password };
 

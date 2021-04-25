@@ -7,6 +7,7 @@ const Navigation = props => {
   const { isMobile, onClick } = props;
   const isAuth = useSelector(state => state.auth.isAuth);
   const userInfo = useSelector(state => state.auth.userInfo);
+  const avatarUrl = useSelector(state => state.auth.avatar);
   let navigationItems = [
     { title: 'Home', to: '/', exact: true },
     { title: 'Sign In', to: '/sign-in' },
@@ -14,8 +15,8 @@ const Navigation = props => {
   ];
 
   if (isAuth) {
-    const avatar = userInfo.withAvatar
-      ? { to: '/', exact: true, className: 'avatar' }
+    const avatar = userInfo.avatar
+      ? { to: '/', exact: true, className: 'avatar', title: <img src={avatarUrl} alt="avatar" /> }
       : { title: `${userInfo.name.slice(0, 1)}`, to: '/', exact: true, className: 'avatar' };
 
     navigationItems = [

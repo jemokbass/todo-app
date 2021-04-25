@@ -31,17 +31,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    max-width: 30px;
     margin: -3px 0 0 20px;
     border: 2px solid $element-color-darkest;
     border-radius: 50%;
 
     a {
+      position: relative;
       margin: 0;
       padding: 1px 10px 2px;
       font-size: 20px;
       font-weight: 700;
       text-shadow: none;
       border: none;
+
+      img {
+        margin: 2px -5px -3px;
+        height: 18px;
+        object-fit: cover;
+      }
 
       &.active {
         border: none;

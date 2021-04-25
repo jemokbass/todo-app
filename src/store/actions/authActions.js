@@ -25,6 +25,11 @@ export const getUserInfo = info => ({
   info,
 });
 
+export const getAvatar = avatar => ({
+  type: actionTypes.GET_AVATAR,
+  avatar,
+});
+
 export const signUp = (info, auth) => dispatch => {
   dispatch(authStart());
   app
@@ -66,6 +71,7 @@ export const signIn = auth => dispatch => {
 
 const checkUserInfo = () => {
   const uid = localStorage.getItem('id');
+
   return new Promise((resolve, reject) => {
     app
       .database()
@@ -76,6 +82,23 @@ const checkUserInfo = () => {
         if (snapshot.exists()) {
           return resolve(snapshot.val());
         } else reject('error');
+      });
+  });
+};
+
+const checkAvatar = avatarName => {
+  const uid = localStorage.getItem('id');
+
+  return new Promise((resolve, reject) => {
+    app
+      .storage()
+      .ref('/images/' + uid + `/${avatarName}`)
+      .getDownloadURL()
+      .then(result => {
+        resolve(result + '/webp4.webp');
+      })
+      .catch(err => {
+        reject(err);
       });
   });
 };
@@ -97,6 +120,15 @@ export const checkLogin = () => dispatch => {
     checkUserInfo()
       .then(res => {
         dispatch(getUserInfo(res));
+        const avatar = res[Object.keys(res)[0]].avatar;
+
+        if (avatar) {
+          checkAvatar(avatar)
+            .then(result => {
+              dispatch(getAvatar(result));
+            })
+            .catch(err => {});
+        }
       })
       .catch(err => 'error');
   }
