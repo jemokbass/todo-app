@@ -39,8 +39,10 @@
     a {
       position: relative;
       max-width: 100%;
+      min-width: 26px;
       margin: 0;
-      padding: 1px 10px 2px;
+      padding: 1px 5px 1px;
+      text-align: center;
       font-size: 20px;
       font-weight: 700;
       text-shadow: none;

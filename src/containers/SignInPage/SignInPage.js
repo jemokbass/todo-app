@@ -50,7 +50,7 @@ const SignInPage = props => {
         <Button type="submit" disabled={loading}>
           Sign In
         </Button>
-        {error && <p>{error.message}</p>}
+        {error && <p className="error">{error.message}</p>}
       </form>
       {isAuth && <Redirect to="/" />}
     </div>

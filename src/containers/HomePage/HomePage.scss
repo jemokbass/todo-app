@@ -23,4 +23,10 @@
       border: 2px solid $element-color;
     }
   }
+
+  &__confetti {
+    min-width: 100%;
+    max-width: 100vw;
+    min-height: 100%;
+  }
 }

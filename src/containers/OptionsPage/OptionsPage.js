@@ -12,7 +12,7 @@ import Select from '@src/components/UI/Select/Select';
 import { ReactComponent as ArrowSvg } from '@src/assets/img/arrow.svg';
 import Dropbox from '@src/components/UI/Dropbox/Dropbox';
 import { useDispatch } from 'react-redux';
-import { changeAvatar, changeInfo, deleteAvatar } from '@src/store/actions/optionsActions';
+import { changeAvatar, changeInfo, deleteAvatar, changePassword } from '@src/store/actions/optionsActions';
 import Loader from '@src/components/Loader/Loader';
 
 const OptionsPage = () => {
@@ -22,8 +22,10 @@ const OptionsPage = () => {
   const userKey = useSelector(state => state.auth.userKey);
   const loading = useSelector(state => state.options.loading);
   const error = useSelector(state => state.options.error);
+  const wrongPassword = useSelector(state => state.options.wrongPassword);
   const submitInfo = (userKey, data) => dispatch(changeInfo(userKey, data));
   const submitAvatar = (data, uid) => dispatch(changeAvatar(data, uid));
+  const changeCurrentPassword = data => dispatch(changePassword(data));
   const deleteAvatarAction = (uid, userInfo, userKey) => dispatch(deleteAvatar(uid, userInfo, userKey));
   const {
     register,
@@ -44,6 +46,10 @@ const OptionsPage = () => {
       const newData = { ...userInfo, theme: data.theme, avatar: data.avatar[0].name };
       submitInfo(userKey, newData);
       submitAvatar(data, userInfo.uid);
+    }
+
+    if (data.withPassword && data.avatar.length <= 0) {
+      changeCurrentPassword(data);
     }
   };
 
@@ -72,8 +78,8 @@ const OptionsPage = () => {
               title="Change Passwords"
               placeholder="Old Password"
               {...register('oldPassword')}
-              errors={!!errors.oldPassword}
-              errorsMessage={errors?.oldPassword?.message}
+              errors={!!errors.oldPassword || !!wrongPassword}
+              errorsMessage={errors?.oldPassword?.message || wrongPassword?.message}
             />
             <Input
               placeholder="New Password"

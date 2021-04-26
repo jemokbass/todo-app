@@ -10,6 +10,11 @@ export const changeOptionsError = error => ({
   error,
 });
 
+export const wrongPassword = error => ({
+  type: actionTypes.WRONG_PASSWORD,
+  error,
+});
+
 export const changeOptionsSuccess = isComplete => ({
   type: actionTypes.CHANGE_OPTIONS_SUCCESS,
   isComplete,
@@ -22,12 +27,8 @@ export const changeInfo = (userKey, data) => dispatch => {
     .database()
     .ref(`users/${userKey}`)
     .update(data)
-    .then(result => {
-      dispatch(changeOptionsSuccess(true));
-    })
-    .catch(err => {
-      dispatch(changeOptionsError(err));
-    });
+    .then(result => dispatch(changeOptionsSuccess(true)))
+    .catch(err => dispatch(changeOptionsError(err)));
 };
 
 export const changeAvatar = (data, uid) => dispatch => {
@@ -38,12 +39,8 @@ export const changeAvatar = (data, uid) => dispatch => {
     .storage()
     .ref(`images/${uid}/${avatar.name}`)
     .put(avatar)
-    .then(result => {
-      dispatch(changeOptionsSuccess(true));
-    })
-    .catch(err => {
-      dispatch(changeOptionsError(err));
-    });
+    .then(result => dispatch(changeOptionsSuccess(true)))
+    .catch(err => dispatch(changeOptionsError(err)));
 };
 
 export const deleteAvatar = (uid, userInfo, userKey) => dispatch => {
@@ -56,14 +53,25 @@ export const deleteAvatar = (uid, userInfo, userKey) => dispatch => {
     .then(result => {
       const newUserInfo = { ...userInfo, avatar: false };
       dispatch(changeInfo(userKey, newUserInfo))
-        .then(result => {
-          dispatch(changeOptionsSuccess(true));
-        })
-        .catch(err => {
-          dispatch(changeOptionsError(err));
-        });
+        .then(result => dispatch(changeOptionsSuccess(true)))
+        .catch(err => dispatch(changeOptionsError(err)));
     })
-    .catch(err => {
-      dispatch(changeOptionsError(err));
-    });
+    .catch(err => dispatch(changeOptionsError(err)));
+};
+
+export const changePassword = data => dispatch => {
+  dispatch(changeOptionsStart());
+  const currentUser = app.auth().currentUser;
+
+  app
+    .auth()
+    .signInWithEmailAndPassword(currentUser.email, data.oldPassword)
+    .then(result => {
+      app
+        .auth()
+        .currentUser.updatePassword(data.newPassword)
+        .then(result => dispatch(changeOptionsSuccess(true)))
+        .catch(err => dispatch(changeOptionsError(err)));
+    })
+    .catch(err => dispatch(wrongPassword(err)));
 };

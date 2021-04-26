@@ -41,12 +41,8 @@ export const signUp = (info, auth) => dispatch => {
         .database()
         .ref('/users')
         .push(info)
-        .then(result => {
-          dispatch(signUpSuccess());
-        })
-        .catch(err => {
-          dispatch(authError(err));
-        });
+        .then(result => dispatch(signUpSuccess()))
+        .catch(err => dispatch(authError(err)));
     })
     .catch(err => {
       dispatch(authError(err));
@@ -65,9 +61,7 @@ export const signIn = auth => dispatch => {
       dispatch(checkLogin());
       dispatch(signInSuccess(result.user.za, result.user.uid));
     })
-    .catch(err => {
-      dispatch(authError(err));
-    });
+    .catch(err => dispatch(authError(err)));
 };
 
 const checkUserInfo = () => {

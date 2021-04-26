@@ -25,9 +25,7 @@ export const todoSubmit = newTodo => dispatch => {
       dispatch(todoSubmitSuccess(result.data));
       dispatch(todoSubmitSuccess([]));
     })
-    .catch(err => {
-      dispatch(todoSubmitError(err));
-    });
+    .catch(err => dispatch(todoSubmitError(err)));
 };
 
 export const fetchTodoStart = () => ({
@@ -83,7 +81,5 @@ export const removeTodo = id => dispatch => {
     .then(result => {
       dispatch(removeTodoSuccess());
     })
-    .catch(err => {
-      dispatch(removeTodoError(err));
-    });
+    .catch(err => dispatch(removeTodoError(err)));
 };

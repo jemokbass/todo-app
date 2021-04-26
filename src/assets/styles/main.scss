@@ -30,6 +30,14 @@ a {
   text-decoration: none;
 }
 
+.main {
+  padding: 0 0 30px;
+}
+
 .main-loader.loader {
   min-height: 100%;
+}
+
+.error {
+  color: rgb(158, 20, 20);
 }

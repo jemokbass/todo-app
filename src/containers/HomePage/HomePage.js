@@ -15,7 +15,7 @@ const HomePage = props => {
           Write First Todo
         </Link>
       </div>
-      {successfulSignUp && <Confetti />}
+      {successfulSignUp && <Confetti className="homepage__confetti" />}
     </div>
   );
 };
