@@ -10,8 +10,9 @@ export const changeOptionsError = error => ({
   error,
 });
 
-export const changeOptionsSuccess = () => ({
+export const changeOptionsSuccess = isComplete => ({
   type: actionTypes.CHANGE_OPTIONS_SUCCESS,
+  isComplete,
 });
 
 export const changeInfo = (userKey, data) => dispatch => {
@@ -22,7 +23,7 @@ export const changeInfo = (userKey, data) => dispatch => {
     .ref(`users/${userKey}`)
     .update(data)
     .then(result => {
-      dispatch(changeOptionsSuccess());
+      dispatch(changeOptionsSuccess(true));
     })
     .catch(err => {
       dispatch(changeOptionsError(err));
@@ -38,7 +39,7 @@ export const changeAvatar = (data, uid) => dispatch => {
     .ref(`images/${uid}/${avatar.name}`)
     .put(avatar)
     .then(result => {
-      dispatch(changeOptionsSuccess());
+      dispatch(changeOptionsSuccess(true));
     })
     .catch(err => {
       dispatch(changeOptionsError(err));
@@ -56,7 +57,7 @@ export const deleteAvatar = (uid, userInfo, userKey) => dispatch => {
       const newUserInfo = { ...userInfo, avatar: false };
       dispatch(changeInfo(userKey, newUserInfo))
         .then(result => {
-          dispatch(changeOptionsSuccess());
+          dispatch(changeOptionsSuccess(true));
         })
         .catch(err => {
           dispatch(changeOptionsError(err));

@@ -24,7 +24,7 @@ const OptionsPage = () => {
   const error = useSelector(state => state.options.error);
   const submitInfo = (userKey, data) => dispatch(changeInfo(userKey, data));
   const submitAvatar = (data, uid) => dispatch(changeAvatar(data, uid));
-  const deleteAvatarHandler = (uid, userInfo, userKey) => dispatch(deleteAvatar(uid, userInfo, userKey));
+  const deleteAvatarAction = (uid, userInfo, userKey) => dispatch(deleteAvatar(uid, userInfo, userKey));
   const {
     register,
     handleSubmit,
@@ -35,10 +35,11 @@ const OptionsPage = () => {
   const withPassword = watch('withPassword');
 
   const submitOptionsHandler = data => {
-    if (!data.withPassword && data.avatar.length < 0) {
+    if (!data.withPassword && data.avatar.length <= 0) {
       const newData = { ...userInfo, theme: data.theme };
       submitInfo(userKey, newData);
     }
+
     if (!data.withPassword && data.avatar.length > 0) {
       const newData = { ...userInfo, theme: data.theme, avatar: data.avatar[0].name };
       submitInfo(userKey, newData);
@@ -46,11 +47,12 @@ const OptionsPage = () => {
     }
   };
 
+  const deleteAvatarHandler = () => {
+    deleteAvatarAction(userInfo.uid, userInfo, userKey);
+  };
+
   const avatarSection = userInfo.avatar ? (
-    <Button
-      className="options-page__delete"
-      onClick={() => deleteAvatarHandler(userInfo.uid, userInfo, userKey)}
-    >
+    <Button className="options-page__delete" onClick={deleteAvatarHandler}>
       Delete avatar?
     </Button>
   ) : (
@@ -91,7 +93,9 @@ const OptionsPage = () => {
         />
         {avatarSection}
         {loading && <Loader />}
-        <Button type="submit">Save changes</Button>
+        <Button disabled={loading} type="submit">
+          Save changes
+        </Button>
         {error && <p>error.message</p>}
       </form>
     </div>

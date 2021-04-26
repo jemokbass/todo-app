@@ -9,14 +9,19 @@ import Loader from '@src/components/Loader/Loader';
 const App = props => {
   const isGetResponse = useSelector(state => state.auth.getResponse);
   const dispatch = useDispatch();
+  const isComplete = useSelector(state => state.options.isComplete);
   const autoSignIn = useCallback(() => dispatch(checkLogin()), [dispatch]);
 
   useEffect(() => {
     autoSignIn();
-  }, [autoSignIn]);
+
+    if (isComplete) {
+      autoSignIn();
+    }
+  }, [autoSignIn, isComplete]);
 
   return isGetResponse ? (
-    <Loader className='main-loader' />
+    <Loader className="main-loader" />
   ) : (
     <Layout>
       <Routes />
