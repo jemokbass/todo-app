@@ -1,7 +1,8 @@
-import Loader from '@src/components/Loader/Loader';
-import { fetchTodo, removeTodo } from '@src/store/actions/todoActions';
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { fetchTodo, removeTodo } from '@src/store/actions/todoActions';
+import Loader from '@src/components/Loader/Loader';
 import TodoListItem from './TodoListItem/TodoListItem';
 
 const TodoListPage = props => {
@@ -10,7 +11,7 @@ const TodoListPage = props => {
   const todoList = useSelector(state => state.todo.todo);
   const dispatch = useDispatch();
   const fetchTodoList = useCallback(uid => dispatch(fetchTodo(uid)), [dispatch]);
-  const removeTodoItem = useCallback(id => dispatch(removeTodo(id)), [dispatch]);
+  const removeTodoItem = id => dispatch(removeTodo(id));
   const uid = useSelector(state => state.auth.id);
 
   useEffect(() => {
@@ -22,6 +23,7 @@ const TodoListPage = props => {
   if (todoList && !loading && !error && todoList.length > 0) {
     fetchedTodoList = todoList.map(todoItem => (
       <TodoListItem
+        to={`todo/${todoItem[0]}`}
         title={todoItem[1].title}
         text={todoItem[1].text}
         key={todoItem[0]}

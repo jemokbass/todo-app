@@ -4,6 +4,7 @@ const initialState = {
   todo: [],
   loading: false,
   error: null,
+  todoBug: null
 };
 
 const newTodoReducer = (state = initialState, action) => {
@@ -21,9 +22,17 @@ const newTodoReducer = (state = initialState, action) => {
     case actionTypes.FETCH_TODO_ERROR:
       return { ...state, loading: false, error: action.error };
     case actionTypes.REMOVE_TODO_START:
-      return { ...state, loading: true, error: null };
+      let todoBug = null
+      if (state.todo.length === 1) {
+        todoBug = true
+      }
+      return { ...state, loading: true, error: null, todoBug };
     case actionTypes.REMOVE_TODO_SUCCESS:
-      return { ...state, loading: false, error: null };
+      let todo = state.todo
+      if (state.todoBug) {
+        todo = []
+      }
+      return { ...state, loading: false, error: null, todo };
     case actionTypes.REMOVE_TODO_ERROR:
       return { ...state, loading: false, error: action.error };
     default:

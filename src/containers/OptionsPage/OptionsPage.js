@@ -32,6 +32,7 @@ const OptionsPage = () => {
     handleSubmit,
     control,
     watch,
+    reset,
     formState: { errors },
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schemaOptions) });
   const withPassword = watch('withPassword');
@@ -46,10 +47,21 @@ const OptionsPage = () => {
       const newData = { ...userInfo, theme: data.theme, avatar: data.avatar[0].name };
       submitInfo(userKey, newData);
       submitAvatar(data, userInfo.uid);
+      reset({ avatar: null });
     }
 
     if (data.withPassword && data.avatar.length <= 0) {
+      const newData = { ...userInfo, theme: data.theme };
+      submitInfo(userKey, newData);
       changeCurrentPassword(data);
+    }
+
+    if (data.withPassword && data.avatar.length > 0) {
+      const newData = { ...userInfo, theme: data.theme, avatar: data.avatar[0].name };
+      submitInfo(userKey, newData);
+      submitAvatar(data, userInfo.uid);
+      changeCurrentPassword(data);
+      reset({ avatar: null });
     }
   };
 
@@ -77,12 +89,14 @@ const OptionsPage = () => {
             <Input
               title="Change Passwords"
               placeholder="Old Password"
+              type="password"
               {...register('oldPassword')}
               errors={!!errors.oldPassword || !!wrongPassword}
               errorsMessage={errors?.oldPassword?.message || wrongPassword?.message}
             />
             <Input
               placeholder="New Password"
+              type="password"
               {...register('newPassword')}
               errors={!!errors.newPassword}
               errorsMessage={errors?.newPassword?.message}

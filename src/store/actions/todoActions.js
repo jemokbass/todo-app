@@ -51,9 +51,9 @@ export const fetchTodo = uid => dispatch => {
     .equalTo(uid)
     .on('value', snapshot => {
       if (snapshot.exists()) {
-        dispatch(fetchTodoSuccess(Object.entries(snapshot.val())));
+        return dispatch(fetchTodoSuccess(Object.entries(snapshot.val())));
       } else {
-        dispatch(fetchTodoError({ errorMessage: 'Error' }));
+        return dispatch(fetchTodoError({ error: { message: 'error' } }));
       }
     });
 };
@@ -62,8 +62,9 @@ export const removeTodoStart = () => ({
   type: actionTypes.REMOVE_TODO_START,
 });
 
-export const removeTodoSuccess = () => ({
+export const removeTodoSuccess = id => ({
   type: actionTypes.REMOVE_TODO_SUCCESS,
+  id,
 });
 
 export const removeTodoError = error => ({
@@ -73,13 +74,14 @@ export const removeTodoError = error => ({
 
 export const removeTodo = id => dispatch => {
   dispatch(removeTodoStart());
+
   app
     .database()
     .ref('/todo')
     .child(`/${id}`)
     .remove()
     .then(result => {
-      dispatch(removeTodoSuccess());
+      dispatch(removeTodoSuccess(id));
     })
     .catch(err => dispatch(removeTodoError(err)));
 };

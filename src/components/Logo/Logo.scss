@@ -4,5 +4,9 @@
   svg {
     display: inline-block;
     height: 40px;
+    
+    rect {
+      stroke: $secondary-color;
+    }
   }
 }

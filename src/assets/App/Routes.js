@@ -24,6 +24,7 @@ const Routes = props => {
         <Route path="/new-todo" component={lazyLoad.newTodoPage} />
         <Route path="/options" component={lazyLoad.optionsPage} />
         <Route path="/logout" component={lazyLoad.logout} />
+        <Route path="/todo/:id" component={lazyLoad.todoPage} />
       </>
     );
   }
