@@ -5,11 +5,13 @@ import Button from '@src/components/UI/Button/Button';
 
 const TodoListItem = ({ title, text, onRemove, to }) => {
   return (
-    <Link className="todo-list-item" to={to}>
-      <div className="todo-list-item__title">{title}</div>
+    <div className="todo-list-item">
+      <Link className="todo-list-item__title" to={to}>
+        {title}
+      </Link>
       <div className="todo-list-item__text">{text}</div>
       <Button onClick={onRemove}>Remove item</Button>
-    </Link>
+    </div>
   );
 };
 

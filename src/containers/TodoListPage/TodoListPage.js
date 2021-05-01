@@ -6,9 +6,9 @@ import Loader from '@src/components/Loader/Loader';
 import TodoListItem from './TodoListItem/TodoListItem';
 
 const TodoListPage = props => {
-  const loading = useSelector(state => state.todo.loading);
-  const error = useSelector(state => state.todo.error);
-  const todoList = useSelector(state => state.todo.todo);
+  const loading = useSelector(state => state.todo.fetchLoading);
+  const error = useSelector(state => state.todo.fetchError);
+  const todoList = useSelector(state => state.todo.allTodo);
   const dispatch = useDispatch();
   const fetchTodoList = useCallback(uid => dispatch(fetchTodo(uid)), [dispatch]);
   const removeTodoItem = id => dispatch(removeTodo(id));

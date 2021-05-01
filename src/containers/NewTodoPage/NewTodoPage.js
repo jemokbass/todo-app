@@ -13,8 +13,8 @@ import { todoSubmit } from '@src/store/actions/todoActions';
 import Checkbox from '@src/components/UI/Checkbox/Checkbox';
 
 const NewTodoPage = () => {
-  const loading = useSelector(state => state.todo.loading);
-  const error = useSelector(state => state.todo.error);
+  const loading = useSelector(state => state.todo.submitLoading);
+  const error = useSelector(state => state.todo.submitError);
   const uid = useSelector(state => state.auth.id);
   const dispatch = useDispatch();
   const submitTodo = newTodo => dispatch(todoSubmit(newTodo));

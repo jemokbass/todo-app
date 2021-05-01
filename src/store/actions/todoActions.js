@@ -10,9 +10,9 @@ export const todoSubmitSuccess = result => ({
   result,
 });
 
-export const todoSubmitError = err => ({
+export const todoSubmitError = error => ({
   type: actionTypes.TODO_SUBMIT_ERROR,
-  error: err,
+  error,
 });
 
 export const todoSubmit = newTodo => dispatch => {
@@ -37,9 +37,9 @@ export const fetchTodoSuccess = result => ({
   result,
 });
 
-export const fetchTodoError = err => ({
+export const fetchTodoError = error => ({
   type: actionTypes.FETCH_TODO_ERROR,
-  error: err,
+  error,
 });
 
 export const fetchTodo = uid => dispatch => {
@@ -58,13 +58,40 @@ export const fetchTodo = uid => dispatch => {
     });
 };
 
+export const getTodoStart = () => ({
+  type: actionTypes.GET_TODO_START,
+});
+
+export const getTodoSuccess = result => ({
+  type: actionTypes.GET_TODO_SUCCESS,
+  result,
+});
+
+export const getTodoError = error => ({
+  type: actionTypes.GET_TODO_ERROR,
+  error,
+});
+
+export const getTodo = id => dispatch => {
+  dispatch(getTodoStart());
+
+  app
+    .database()
+    .ref(`todo/${id}`)
+    .get()
+    .then(result => {
+      dispatch(getTodoSuccess(result.toJSON()));
+    })
+    .catch(error => getTodoError(error));
+};
+
 export const removeTodoStart = () => ({
   type: actionTypes.REMOVE_TODO_START,
 });
 
-export const removeTodoSuccess = id => ({
+export const removeTodoSuccess = cleanCurrentTodo => ({
   type: actionTypes.REMOVE_TODO_SUCCESS,
-  id,
+  cleanCurrentTodo,
 });
 
 export const removeTodoError = error => ({
@@ -72,7 +99,7 @@ export const removeTodoError = error => ({
   error,
 });
 
-export const removeTodo = id => dispatch => {
+export const removeTodo = (id, cleanCurrentTodo) => dispatch => {
   dispatch(removeTodoStart());
 
   app
@@ -81,7 +108,11 @@ export const removeTodo = id => dispatch => {
     .child(`/${id}`)
     .remove()
     .then(result => {
-      dispatch(removeTodoSuccess(id));
+      if (cleanCurrentTodo) {
+        dispatch(removeTodoSuccess(cleanCurrentTodo));
+      } else {
+        dispatch(removeTodoSuccess());
+      }
     })
-    .catch(err => dispatch(removeTodoError(err)));
+    .catch(error => dispatch(removeTodoError(error)));
 };
