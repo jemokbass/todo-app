@@ -6,6 +6,7 @@ import NavigationItem from './NavigationItem/NavigationItem';
 const Navigation = props => {
   const { isMobile, onClick } = props;
   const isAuth = useSelector(state => state.auth.isAuth);
+  const error = useSelector(state => state.auth.error);
   const userInfo = useSelector(state => state.auth.userInfo);
   const avatarUrl = useSelector(state => state.auth.avatar);
   let navigationItems = [
@@ -14,14 +15,14 @@ const Navigation = props => {
     { title: 'Sign Up ', to: '/sign-up' },
   ];
 
-  if (isAuth) {
-    let avatar = null;
+  if (isAuth && !error) {
+    let avatar = { title: '', to: '' };
 
-    if (userInfo.name) {
+    if (userInfo?.name) {
       avatar = { title: `${userInfo?.name.slice(0, 1)}`, to: '/', exact: true, className: 'avatar' };
     }
 
-    if (userInfo.avatar) {
+    if (userInfo?.avatar) {
       avatar = { to: '/', exact: true, className: 'avatar', title: <img src={avatarUrl} alt="avatar" /> };
     }
 

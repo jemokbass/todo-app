@@ -8,6 +8,7 @@ import Loader from '@src/components/Loader/Loader';
 
 const App = props => {
   const isGetResponse = useSelector(state => state.auth.getResponse);
+  const error = useSelector(state => state.auth.error);
   const dispatch = useDispatch();
   const isComplete = useSelector(state => state.options.isComplete);
   const autoSignIn = useCallback(() => dispatch(checkLogin()), [dispatch]);
@@ -20,13 +21,21 @@ const App = props => {
     }
   }, [autoSignIn, isComplete]);
 
-  return isGetResponse ? (
-    <Loader className="main-loader" />
-  ) : (
-    <Layout>
-      <Routes />
-    </Layout>
-  );
+  let app = <Loader className="main-loader" />;
+
+  if (isGetResponse || !error) {
+    app = (
+      <Layout>
+        <Routes />
+      </Layout>
+    );
+  }
+
+  if (error) {
+    app = <p className="error">{error.message}</p>;
+  }
+
+  return app;
 };
 
 export default App;

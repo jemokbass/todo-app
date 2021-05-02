@@ -1,12 +1,14 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getTodo, removeTodo } from '@src/store/actions/todoActions';
 import Loader from '@src/components/Loader/Loader';
-import Button from '@src/components/UI/Button/Button';
 import { Redirect } from 'react-router';
+import TodoPageInfo from './TodoPageInfo/TodoPageInfo';
+import TodoPageEdit from './TodoPageEdit/TodoPageEdit';
 
 const TodoPage = props => {
+  const [editTodo, setEditTodo] = useState(false);
   const id = props.match.params.id;
   const dispatch = useDispatch();
   const todo = useSelector(state => state.todo.todo);
@@ -23,20 +25,27 @@ const TodoPage = props => {
 
   if (todo) {
     todoInfo = (
-      <>
-        <h3 className="todo-page__title">{todo.title}</h3>
-        <div className="todo-page__text">{todo.text}</div>
-        <Button className="todo-page__button" disabled={loading} onClick={() => removeCurrentTodo(id, true)}>
-          Remove todo
-        </Button>
-      </>
+      <TodoPageInfo
+        loading={loading}
+        todo={todo}
+        removeHandler={() => removeCurrentTodo(id, true)}
+        editHandler={() => setEditTodo(true)}
+      />
     );
+  }
+
+  if (editTodo) {
+    todoInfo = <TodoPageEdit todo={todo} />;
+  }
+
+  if (!todo) {
+    todoInfo = <Redirect to="/todo-list" />;
   }
 
   return (
     <div className="todo-page">
       <div className="todo-page__inner">
-        {todoInfo ? todoInfo : <Redirect to="/todo-list" />}
+        {todoInfo}
         {loading && <Loader />}
         {error && <p className="error">{error.message}</p>}
       </div>
