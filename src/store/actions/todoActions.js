@@ -15,16 +15,45 @@ export const todoSubmitError = error => ({
   error,
 });
 
+export const changeTodoStart = () => ({
+  type: actionTypes.CHANGE_TODO_START,
+});
+
+export const changeTodoError = error => ({
+  type: actionTypes.CHANGE_OPTIONS_ERROR,
+  error,
+});
+
+export const changeTodoSuccess = () => ({
+  type: actionTypes.CHANGE_TODO_SUCCESS,
+});
+
+export const changeTodo = (id, data) => dispatch => {
+  dispatch(changeTodoStart());
+
+  app
+    .database()
+    .ref('todo/' + id)
+    .update(data)
+    .then(result => {
+      dispatch(changeTodoSuccess());
+    })
+    .catch(error => {
+      dispatch(changeTodoError(error));
+    });
+};
+
 export const todoPositionColumn = () => ({
-  type: actionTypes.TODO_POSITION_COLUMN
-})
+  type: actionTypes.TODO_POSITION_COLUMN,
+});
 
 export const todoPositionList = () => ({
-  type: actionTypes.TODO_POSITION_LIST
-})
+  type: actionTypes.TODO_POSITION_LIST,
+});
 
 export const todoSubmit = newTodo => dispatch => {
   dispatch(todoSubmitStart());
+
   app
     .database()
     .ref('/todo')
@@ -52,6 +81,7 @@ export const fetchTodoError = error => ({
 
 export const fetchTodo = uid => dispatch => {
   dispatch(fetchTodoStart());
+
   app
     .database()
     .ref('todo/')

@@ -11,6 +11,8 @@ const initialState = {
   error: null,
   todoBug: null,
   todoPosition: false,
+  changeTodoLoading: false,
+  changeTodoError: null,
 };
 
 const newTodoReducer = (state = initialState, action) => {
@@ -22,9 +24,9 @@ const newTodoReducer = (state = initialState, action) => {
     case actionTypes.TODO_SUBMIT_ERROR:
       return { ...state, submitLoading: false, submitError: action.error };
     case actionTypes.TODO_POSITION_COLUMN:
-      return {...state, todoPosition: true}
+      return { ...state, todoPosition: true };
     case actionTypes.TODO_POSITION_LIST:
-      return {...state, todoPosition: false}
+      return { ...state, todoPosition: false };
     case actionTypes.FETCH_TODO_START:
       return { ...state, fetchError: null, fetchLoading: true };
     case actionTypes.FETCH_TODO_SUCCESS:
@@ -58,6 +60,12 @@ const newTodoReducer = (state = initialState, action) => {
       return { ...state, loading: false, error: null, todo: action.result };
     case actionTypes.GET_TODO_ERROR:
       return { ...state, loading: false, error: action.error };
+    case actionTypes.CHANGE_TODO_START:
+      return { ...state, changeTodoLoading: true, changeTodoError: null };
+    case actionTypes.CHANGE_TODO_SUCCESS:
+      return { ...state, changeTodoLoading: false, changeTodoError: null };
+    case actionTypes.CHANGE_TODO_ERROR:
+      return { ...state, changeTodoLoading: false, changeTodoError: action.error };
     default:
       return state;
   }

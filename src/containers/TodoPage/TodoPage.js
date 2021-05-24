@@ -35,7 +35,7 @@ const TodoPage = props => {
   }
 
   if (editTodo) {
-    todoInfo = <TodoPageEdit todo={todo} />;
+    todoInfo = <TodoPageEdit todo={todo} id={id} />;
   }
 
   if (!loading && !todo) {
