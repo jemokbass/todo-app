@@ -38,7 +38,7 @@ const TodoPage = props => {
     todoInfo = <TodoPageEdit todo={todo} />;
   }
 
-  if (!todo) {
+  if (!loading && !todo) {
     todoInfo = <Redirect to="/todo-list" />;
   }
 

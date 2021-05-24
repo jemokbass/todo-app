@@ -10,6 +10,7 @@ const initialState = {
   loading: false,
   error: null,
   todoBug: null,
+  todoPosition: false,
 };
 
 const newTodoReducer = (state = initialState, action) => {
@@ -20,6 +21,10 @@ const newTodoReducer = (state = initialState, action) => {
       return { ...state, submitLoading: false, submitError: false };
     case actionTypes.TODO_SUBMIT_ERROR:
       return { ...state, submitLoading: false, submitError: action.error };
+    case actionTypes.TODO_POSITION_COLUMN:
+      return {...state, todoPosition: true}
+    case actionTypes.TODO_POSITION_LIST:
+      return {...state, todoPosition: false}
     case actionTypes.FETCH_TODO_START:
       return { ...state, fetchError: null, fetchLoading: true };
     case actionTypes.FETCH_TODO_SUCCESS:

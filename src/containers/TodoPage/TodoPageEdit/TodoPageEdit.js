@@ -14,7 +14,11 @@ const TodoPageEdit = props => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: 'onBlur', resolver: yupResolver(schemaNewTodo) });
+  } = useForm({
+    mode: 'onBlur',
+    resolver: yupResolver(schemaNewTodo),
+    defaultValues: { title: todo.title, text: todo.text },
+  });
 
   const editTodoHandler = data => {
     console.log(data);

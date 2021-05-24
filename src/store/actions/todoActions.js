@@ -15,6 +15,14 @@ export const todoSubmitError = error => ({
   error,
 });
 
+export const todoPositionColumn = () => ({
+  type: actionTypes.TODO_POSITION_COLUMN
+})
+
+export const todoPositionList = () => ({
+  type: actionTypes.TODO_POSITION_LIST
+})
+
 export const todoSubmit = newTodo => dispatch => {
   dispatch(todoSubmitStart());
   app

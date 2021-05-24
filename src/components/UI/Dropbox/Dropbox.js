@@ -19,7 +19,7 @@ const Dropbox = ({ control, name, errors, errorsMessage }) => {
             )}
           </Dropzone>
           <ul className="dropbox-list">
-            {value.map((file, index) => (
+            {value?.map((file, index) => (
               <li className="dropbox-item" key={index}>
                 <span className="dropbox-item__title">{file.name}</span>
                 <span className="dropbox-item__size">{file.size} bytes</span>

@@ -69,7 +69,7 @@ const OptionsPage = () => {
     deleteAvatarAction(userInfo.uid, userInfo, userKey);
   };
 
-  const avatarSection = userInfo.avatar ? (
+  const avatarSection = userInfo?.avatar ? (
     <Button className="options-page__delete" onClick={deleteAvatarHandler}>
       Delete avatar?
     </Button>
@@ -105,7 +105,7 @@ const OptionsPage = () => {
         )}
         <Checkbox title="Change password?" withValue {...register('withPassword')} />
         <Select
-          defaultValue={userInfo.theme}
+          defaultValue={userInfo?.theme}
           name="theme"
           control={control}
           errors={!!errors.theme}
