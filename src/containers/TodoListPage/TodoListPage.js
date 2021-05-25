@@ -8,6 +8,7 @@ import Button from '@src/components/UI/Button/Button';
 import { ReactComponent as ListButtonIcon } from '@src/assets/img/list-button.svg';
 import { ReactComponent as ColumnButtonIcon } from '@src/assets/img/column-button.svg';
 import { ReactComponent as StarIcon } from '@src/assets/img/star.svg';
+import { ReactComponent as ArrowIcon } from '@src/assets/img/arrow-bottom.svg';
 
 const TodoListPage = props => {
   const loading = useSelector(state => state.todo.fetchLoading);
@@ -21,6 +22,7 @@ const TodoListPage = props => {
   const columnTodoHandler = () => dispatch(todoPositionColumn());
   const listTodoHandler = () => dispatch(todoPositionList());
   const [favList, setFavList] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     fetchTodoList(uid);
@@ -30,6 +32,10 @@ const TodoListPage = props => {
 
   if (favList) {
     todoList = todoList.filter(item => item[1].favorite !== false);
+  }
+
+  if (searchValue) {
+    todoList = todoList.filter(item => item[1].title.indexOf(searchValue) !== -1);
   }
 
   if (todoList && !loading && !error && todoList.length > 0) {
@@ -45,6 +51,21 @@ const TodoListPage = props => {
     ));
   }
 
+  let positionButtons = (
+    <div className="todo-list-page__button">
+      <Button onClick={listTodoHandler}>
+        <ListButtonIcon />
+      </Button>
+      <Button onClick={columnTodoHandler}>
+        <ColumnButtonIcon />
+      </Button>
+    </div>
+  );
+
+  if (window.innerWidth < 650) {
+    positionButtons = null;
+  }
+
   return (
     <div className="todo-list-page">
       <Button
@@ -53,15 +74,22 @@ const TodoListPage = props => {
       >
         <StarIcon />
       </Button>
-      <div className="todo-list-page__button">
-        <Button onClick={listTodoHandler}>
-          <ListButtonIcon />
-        </Button>
-        <Button onClick={columnTodoHandler}>
-          <ColumnButtonIcon />
-        </Button>
-      </div>
+      {positionButtons}
       <div className={`container todo-list-page__inner${todoPositionClass ? '' : ' list-style'}`}>
+        <div className="todo-list-page__search">
+          <span>
+            Search <ArrowIcon />
+          </span>
+          <label className="label">
+            <input
+              className="input"
+              placeholder="Enter value"
+              value={searchValue}
+              onChange={e => setSearchValue(e.target.value)}
+              type="text"
+            />
+          </label>
+        </div>
         {loading ? <Loader /> : fetchedTodoList}
         {error && <p>{error.message}</p>}
       </div>
