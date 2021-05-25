@@ -27,7 +27,7 @@ const NewTodoPage = () => {
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schemaNewTodo) });
 
   const submitTodoHandler = data => {
-    const newTodo = { title: data.title, text: data.text, uid };
+    const newTodo = { title: data.title, text: data.text, favorite: data.favorite, uid };
     submitTodo(newTodo);
     reset({ title: '', text: '', check: data.check });
 
@@ -51,6 +51,7 @@ const NewTodoPage = () => {
           errorsMessage={errors?.text?.message}
           {...register('text')}
         />
+        <Checkbox title="Is favorite?" {...register('favorite')} />
         <Checkbox title="Go to Todo List" {...register('check')} />
         {loading && <Loader />}
         <Button className="new-todo-page__button" type="submit">
