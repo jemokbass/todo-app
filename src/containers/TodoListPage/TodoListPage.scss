@@ -40,48 +40,12 @@
     }
   }
 
-  &__star {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-
-    &.button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: auto;
-      padding: 5px;
-      background: transparent;
-      border: 1px solid $text-color-darkest;
-      border-radius: 10px;
-    }
-
-    svg {
-      width: 30px;
-      height: 30px;
-      transition: all 0.4s ease 0s;
-
-      path {
-        transition: all 0.4s ease 0s;
-      }
-    }
-
-    &.active {
-      svg {
-        fill: $basic-color;
-
-        path {
-          stroke: $secondary-color;
-        }
-      }
-    }
-  }
-
   &__search {
     position: relative;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    max-width: 60%;
     margin: 0 auto 15px;
     padding: 0 40px;
     cursor: pointer;
@@ -92,7 +56,8 @@
       align-items: center;
       flex: 0 0 100%;
       width: 100%;
-      margin: 0 0 10px;
+      max-width: 200px;
+      margin: 0 auto 10px;
       font-size: 20px;
     }
 
@@ -108,9 +73,14 @@
       bottom: -50px;
       left: 0;
       z-index: 2;
-      flex: 0 0 100%;
+      flex: 0 0 60%;
+      text-align: center;
       transform: scale(0);
       transition: all 0.4s ease 0s;
+
+      .input {
+        max-width: 300px;
+      }
     }
 
     &:hover,
@@ -120,5 +90,9 @@
         height: auto;
       }
     }
+  }
+
+  &__desc {
+    text-align: center;
   }
 }

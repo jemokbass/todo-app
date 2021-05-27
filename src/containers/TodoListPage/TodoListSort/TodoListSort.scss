@@ -1,0 +1,81 @@
+.todo-list-sort {
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    padding: 5px;
+    background: transparent;
+    border: 1px solid $text-color-darkest;
+    border-radius: 10px;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transform: scale(0) translateY(-300px);
+    transition: all 0.5s ease 0s;
+
+    &.active {
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  &__star {
+    &.button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: auto;
+      padding: 5px;
+      background: transparent;
+      border: 1px solid $text-color-darkest;
+      border-radius: 10px;
+    }
+
+    svg {
+      width: 30px;
+      height: 30px;
+      transition: all 0.4s ease 0s;
+
+      path {
+        transition: all 0.4s ease 0s;
+      }
+    }
+
+    &.active {
+      svg {
+        fill: $basic-color;
+
+        path {
+          stroke: $secondary-color;
+        }
+      }
+    }
+  }
+
+  &__list {
+    &.button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: auto;
+      padding: 5px;
+      background: transparent;
+      border: 1px solid $text-color-darkest;
+      border-radius: 10px;
+    }
+
+    &.active {
+      background: $element-color-lightest;
+    }
+  }
+}
