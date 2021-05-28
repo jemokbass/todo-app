@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchTodo, removeTodo, todoPositionColumn, todoPositionList } from '@src/store/actions/todoActions';
@@ -10,6 +10,7 @@ import { ReactComponent as ColumnButtonIcon } from '@src/assets/img/column-butto
 import { ReactComponent as ArrowIcon } from '@src/assets/img/arrow-bottom.svg';
 import { sortArrAZ, sortArrZA } from '@src/shared/utility';
 import TodoListSort from './TodoListSort/TodoListSort';
+import { LanguageContext } from '@src/shared/context';
 
 const TodoListPage = props => {
   const loading = useSelector(state => state.todo.fetchLoading);
@@ -27,12 +28,13 @@ const TodoListPage = props => {
   const [sortListZA, setSortListZA] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   let currentTodoList = todoList;
+  const resources = useContext(LanguageContext);
 
   useEffect(() => {
     fetchTodoList(uid);
   }, [fetchTodoList, uid]);
 
-  let fetchedTodoList = <p className="todo-list-page__desc">So far there are none todo :(</p>;
+  let fetchedTodoList = <p className="todo-list-page__desc">{resources.todo_list_empty}</p>;
 
   if (searchValue) {
     currentTodoList = todoList.filter(item => item[1].title.indexOf(searchValue) !== -1);
@@ -101,12 +103,12 @@ const TodoListPage = props => {
       {positionButtons}
       <div className="todo-list-page__search">
         <span>
-          Search <ArrowIcon />
+          {resources.todo_list_search} <ArrowIcon />
         </span>
         <label className="label">
           <input
             className="input"
-            placeholder="Enter value"
+            placeholder={resources.todo_list_search_placeholder}
             value={searchValue}
             onChange={e => setSearchValue(e.target.value)}
             type="text"

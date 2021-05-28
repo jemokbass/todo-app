@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -9,6 +9,7 @@ import Input from '@src/components/UI/Input/Input';
 import Button from '@src/components/UI/Button/Button';
 import Loader from '@src/components/Loader/Loader';
 import { signIn } from '@src/store/actions/authActions';
+import { LanguageContext } from '@src/shared/context';
 
 const SignInPage = props => {
   const loading = useSelector(state => state.auth.loading);
@@ -21,6 +22,7 @@ const SignInPage = props => {
     handleSubmit,
     formState: { errors },
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schemaSignIn) });
+  const resources = useContext(LanguageContext);
 
   const submitSignInHandler = data => {
     submitForm(data);
@@ -28,10 +30,10 @@ const SignInPage = props => {
 
   return (
     <div className="sign-in-page">
-      <h2 className="sign-in-page__title">Sign In</h2>
+      <h2 className="sign-in-page__title">{resources.sign_in_title}</h2>
       <form id="sign-in" className="sign-in-page__form" onSubmit={handleSubmit(submitSignInHandler)}>
         <Input
-          label="Mail"
+          label={resources.sign_in_mail}
           type="email"
           errors={!!errors.email}
           errorsMessage={errors?.email?.message}
@@ -39,7 +41,7 @@ const SignInPage = props => {
           {...register('email')}
         />
         <Input
-          label="Password"
+          label={resources.sign_in_password}
           type="password"
           errors={!!errors.password}
           errorsMessage={errors?.password?.message}
@@ -48,7 +50,7 @@ const SignInPage = props => {
         />
         {loading && <Loader />}
         <Button type="submit" disabled={loading}>
-          Sign In
+          {resources.sign_in_button}
         </Button>
         {error && <p className="error">{error.message}</p>}
       </form>

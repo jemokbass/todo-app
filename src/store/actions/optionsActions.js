@@ -75,3 +75,18 @@ export const changePassword = data => dispatch => {
     })
     .catch(err => dispatch(wrongPassword(err)));
 };
+
+export const getLanguage = () => {
+  let currentLanguage = localStorage.getItem('language');
+
+  if (currentLanguage) {
+    return { type: actionTypes.GET_LANGUAGE, currentLanguage };
+  } else return { type: actionTypes.GET_LANGUAGE, currentLanguage: 'en' };
+};
+
+export const changeLanguage = language => {
+  localStorage.removeItem('language');
+  localStorage.setItem('language', language);
+
+  return { type: actionTypes.CHANGE_LANGUAGE, language };
+};

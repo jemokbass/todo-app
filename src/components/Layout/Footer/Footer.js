@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
+import { LanguageContext } from '@src/shared/context';
+
 const Footer = () => {
+  const resources = useContext(LanguageContext);
+
   return (
     <footer className="footer">
       <ul>
         <li>
-          <Link to="/copyright">Copyright</Link>
+          <Link to="/copyright">{resources.footer_copy}</Link>
         </li>
       </ul>
     </footer>

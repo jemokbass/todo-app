@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -14,6 +14,7 @@ import Dropbox from '@src/components/UI/Dropbox/Dropbox';
 import { useDispatch } from 'react-redux';
 import { changeAvatar, changeInfo, deleteAvatar, changePassword } from '@src/store/actions/optionsActions';
 import Loader from '@src/components/Loader/Loader';
+import { LanguageContext } from '@src/shared/context';
 
 const OptionsPage = () => {
   const history = useHistory();
@@ -36,32 +37,41 @@ const OptionsPage = () => {
     formState: { errors },
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schemaOptions) });
   const withPassword = watch('withPassword');
+  const resources = useContext(LanguageContext);
 
   const submitOptionsHandler = data => {
-    if (!data.withPassword && data.avatar.length <= 0) {
-      const newData = { ...userInfo, theme: data.theme };
-      submitInfo(userKey, newData);
-    }
+    console.log(data);
+    if (data.avatar) {
+      if (!data.withPassword && data.avatar.length <= 0) {
+        const newData = { ...userInfo, theme: data.theme };
+        submitInfo(userKey, newData);
+      }
 
-    if (!data.withPassword && data.avatar.length > 0) {
-      const newData = { ...userInfo, theme: data.theme, avatar: data.avatar[0].name };
-      submitInfo(userKey, newData);
-      submitAvatar(data, userInfo.uid);
-      reset({ avatar: null });
-    }
+      if (!data.withPassword && data.avatar.length > 0) {
+        const newData = { ...userInfo, theme: data.theme, avatar: data.avatar[0].name };
+        submitInfo(userKey, newData);
+        submitAvatar(data, userInfo.uid);
+        reset({ avatar: null });
+      }
 
-    if (data.withPassword && data.avatar.length <= 0) {
-      const newData = { ...userInfo, theme: data.theme };
-      submitInfo(userKey, newData);
-      changeCurrentPassword(data);
-    }
+      if (data.withPassword && data.avatar.length <= 0) {
+        const newData = { ...userInfo, theme: data.theme };
+        submitInfo(userKey, newData);
+        changeCurrentPassword(data);
+      }
 
-    if (data.withPassword && data.avatar.length > 0) {
-      const newData = { ...userInfo, theme: data.theme, avatar: data.avatar[0].name };
-      submitInfo(userKey, newData);
-      submitAvatar(data, userInfo.uid);
-      changeCurrentPassword(data);
-      reset({ avatar: null });
+      if (data.withPassword && data.avatar.length > 0) {
+        const newData = { ...userInfo, theme: data.theme, avatar: data.avatar[0].name };
+        submitInfo(userKey, newData);
+        submitAvatar(data, userInfo.uid);
+        changeCurrentPassword(data);
+        reset({ avatar: null });
+      }
+    } else {
+      if (!data.withPassword) {
+        const newData = { ...userInfo, theme: data.theme };
+        submitInfo(userKey, newData);
+      }
     }
   };
 
@@ -71,7 +81,7 @@ const OptionsPage = () => {
 
   const avatarSection = userInfo?.avatar ? (
     <Button className="options-page__delete" onClick={deleteAvatarHandler}>
-      Delete avatar?
+      {resources.options_delete_avatar}
     </Button>
   ) : (
     <Dropbox name="avatar" control={control} />
@@ -79,7 +89,7 @@ const OptionsPage = () => {
 
   return (
     <div className="options-page">
-      <h2 className="options-page__title">Options</h2>
+      <h2 className="options-page__title">{resources.options_title}</h2>
       <form className="options-page__form" onSubmit={handleSubmit(submitOptionsHandler)}>
         <Button className="options-page__form-button" onClick={() => history.goBack()}>
           <ArrowSvg />
@@ -87,15 +97,15 @@ const OptionsPage = () => {
         {withPassword && (
           <>
             <Input
-              title="Change Passwords"
-              placeholder="Old Password"
+              title={resources.options_change_password}
+              placeholder={resources.options_old_password}
               type="password"
               {...register('oldPassword')}
               errors={!!errors.oldPassword || !!wrongPassword}
               errorsMessage={errors?.oldPassword?.message || wrongPassword?.message}
             />
             <Input
-              placeholder="New Password"
+              placeholder={resources.options_new_password}
               type="password"
               {...register('newPassword')}
               errors={!!errors.newPassword}
@@ -103,7 +113,11 @@ const OptionsPage = () => {
             />
           </>
         )}
-        <Checkbox title="Change password?" withValue {...register('withPassword')} />
+        <Checkbox
+          title={resources.options_change_password_checkbox}
+          withValue
+          {...register('withPassword')}
+        />
         <Select
           defaultValue={userInfo?.theme}
           name="theme"
@@ -114,7 +128,7 @@ const OptionsPage = () => {
         {avatarSection}
         {loading && <Loader />}
         <Button disabled={loading} type="submit">
-          Save changes
+          {resources.options_save_changes}
         </Button>
         {error && <p>error.message</p>}
       </form>

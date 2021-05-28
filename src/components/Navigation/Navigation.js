@@ -1,7 +1,10 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useContext } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import NavigationItem from './NavigationItem/NavigationItem';
+import { LanguageContext } from '@src/shared/context';
+import ReactSelect from 'react-select';
+import { changeLanguage } from '@src/store/actions/optionsActions';
 
 const Navigation = props => {
   const { isMobile, onClick } = props;
@@ -9,11 +12,18 @@ const Navigation = props => {
   const error = useSelector(state => state.auth.error);
   const userInfo = useSelector(state => state.auth.userInfo);
   const avatarUrl = useSelector(state => state.auth.avatar);
+  const resources = useContext(LanguageContext);
   let navigationItems = [
-    { title: 'Home', to: '/', exact: true },
-    { title: 'Sign In', to: '/sign-in' },
-    { title: 'Sign Up ', to: '/sign-up' },
+    { title: resources.navigation_home, to: '/', exact: true },
+    { title: resources.navigation_sign_in, to: '/sign-in' },
+    { title: resources.navigation_sign_up, to: '/sign-up' },
   ];
+  const options = [
+    { value: 'en', label: 'En' },
+    { value: 'ru', label: 'Ru' },
+  ];
+  const dispatch = useDispatch();
+  const changeLanguageSetter = language => dispatch(changeLanguage(language));
 
   if (isAuth && !error) {
     let avatar = { title: '', to: '' };
@@ -27,11 +37,11 @@ const Navigation = props => {
     }
 
     navigationItems = [
-      { title: 'Home', to: '/', exact: true },
-      { title: 'Todo List', to: '/todo-list' },
-      { title: 'New Todo', to: '/new-todo' },
-      { title: 'Options', to: '/options' },
-      { title: 'Logout', to: '/logout' },
+      { title: resources.navigation_home, to: '/', exact: true },
+      { title: resources.navigation_todo_list, to: '/todo-list' },
+      { title: resources.navigation_new_todo, to: '/new-todo' },
+      { title: resources.navigation_options, to: '/options' },
+      { title: resources.navigation_logout, to: '/logout' },
       avatar,
     ];
   }
@@ -46,10 +56,21 @@ const Navigation = props => {
     />
   ));
 
+  const changeLanguageHandler = value => {
+    changeLanguageSetter(value.value);
+  };
+
   return (
-    <nav className={`navigation${isMobile ? ' mobile' : ''}`} onClick={onClick}>
-      <ul>{navigationList}</ul>
-    </nav>
+    <div className="nav">
+      <ReactSelect
+        options={options}
+        onChange={changeLanguageHandler}
+        placeholder={resources.navigation_lang_placeholder}
+      />
+      <nav className={`navigation${isMobile ? ' mobile' : ''}`} onClick={onClick}>
+        <ul>{navigationList}</ul>
+      </nav>
+    </div>
   );
 };
 

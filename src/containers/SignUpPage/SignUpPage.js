@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -10,6 +10,7 @@ import Button from '@src/components/UI/Button/Button';
 import Loader from '@src/components/Loader/Loader';
 import { signUp } from '@src/store/actions/authActions';
 import { Redirect } from 'react-router';
+import { LanguageContext } from '@src/shared/context';
 
 const SignUpPage = props => {
   const loading = useSelector(state => state.auth.loading);
@@ -22,6 +23,7 @@ const SignUpPage = props => {
     formState: { errors },
   } = useForm({ mode: 'onBlur', resolver: yupResolver(schemaSignUp) });
   const [successfulSubmit, setSuccessfulSubmit] = useState(false);
+  const resources = useContext(LanguageContext);
 
   const normalizePhoneNumber = value => {
     const phoneNumber = parsePhoneNumberFromString(value);
@@ -48,17 +50,17 @@ const SignUpPage = props => {
 
   return (
     <div className="sign-up-page">
-      <h2 className="sign-up-page__title">Sign Up</h2>
+      <h2 className="sign-up-page__title">{resources.sign_up_title}</h2>
       <form id="sign-up" className="sign-up-page__form" onSubmit={handleSubmit(submitSignUpHandler)}>
         <Input
-          label="Name"
+          label={resources.sign_up_name}
           errors={!!errors.name}
           errorsMessage={errors?.name?.message}
-          placeholder="John"
+          placeholder={resources.sign_up_name_placeholder}
           {...register('name')}
         />
         <Input
-          label="Mail"
+          label={resources.sign_up_mail}
           type="email"
           errors={!!errors.email}
           errorsMessage={errors?.email?.message}
@@ -66,7 +68,7 @@ const SignUpPage = props => {
           {...register('email')}
         />
         <Input
-          label="Password"
+          label={resources.sign_up_password}
           type="password"
           errors={!!errors.password}
           errorsMessage={errors?.password?.message}
@@ -74,7 +76,7 @@ const SignUpPage = props => {
           {...register('password')}
         />
         <Input
-          label="Phone"
+          label={resources.sign_up_phone}
           type="tel"
           errors={!!errors.phone}
           errorsMessage={errors?.phone?.message}
@@ -86,7 +88,7 @@ const SignUpPage = props => {
         />
         {loading && <Loader />}
         <Button type="submit" disabled={loading || error}>
-          Sign Up
+          {resources.sign_up_button}
         </Button>
         {error && <p>{error.message}</p>}
       </form>

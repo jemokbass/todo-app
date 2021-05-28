@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import Button from '@src/components/UI/Button/Button';
 import Loader from '@src/components/Loader/Loader';
 import { changeTodo } from '@src/store/actions/todoActions';
 import Checkbox from '@src/components/UI/Checkbox/Checkbox';
+import { LanguageContext } from '@src/shared/context';
 
 const TodoPageEdit = props => {
   const { todo } = props;
@@ -27,6 +28,7 @@ const TodoPageEdit = props => {
   const loading = useSelector(state => state.todo.changeTodoLoading);
   const error = useSelector(state => state.todo.changeTodoError);
   const changeTodoData = (id, data) => dispatch(changeTodo(id, data));
+  const resources = useContext(LanguageContext);
 
   const editTodoHandler = data => {
     changeTodoData(id, data);
@@ -38,7 +40,7 @@ const TodoPageEdit = props => {
       <Input errors={!!errors.title} errorsMessage={errors?.title?.message} {...register('title')} />
       <div className="todo-page__text">{todo.text}</div>
       <Textarea errors={!!errors.text} errorsMessage={errors?.text?.message} {...register('text')} />
-      <Checkbox title="Is favorite?" {...register('favorite')} />
+      <Checkbox title={resources.new_todo_fav} {...register('favorite')} />
       {loading && <Loader />}
       {error && <p className="error">{error.message}</p>}
       <Button type="submit" disabled={loading}>

@@ -9,6 +9,7 @@ import TodoPageEdit from './TodoPageEdit/TodoPageEdit';
 
 const TodoPage = props => {
   const [editTodo, setEditTodo] = useState(false);
+  const [isRemovedTodo, setIsRemovedTodo] = useState(false);
   const id = props.match.params.id;
   const dispatch = useDispatch();
   const todo = useSelector(state => state.todo.todo);
@@ -28,7 +29,10 @@ const TodoPage = props => {
       <TodoPageInfo
         loading={loading}
         todo={todo}
-        removeHandler={() => removeCurrentTodo(id, true)}
+        removeHandler={() => {
+          removeCurrentTodo(id, true);
+          setIsRemovedTodo(true);
+        }}
         editHandler={() => setEditTodo(true)}
       />
     );
@@ -38,7 +42,7 @@ const TodoPage = props => {
     todoInfo = <TodoPageEdit todo={todo} id={id} />;
   }
 
-  if (!loading && !todo) {
+  if (!loading && !todo && isRemovedTodo) {
     todoInfo = <Redirect to="/todo-list" />;
   }
 

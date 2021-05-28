@@ -38,6 +38,16 @@
         opacity: 0.4;
       }
     }
+
+    svg {
+      rect {
+        fill: $secondary-color-lightest;
+
+        &:first-child {
+          fill: $element-color;
+        }
+      }
+    }
   }
 
   &__search {

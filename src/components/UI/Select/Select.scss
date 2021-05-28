@@ -13,9 +13,30 @@
 
   .css-1pahdxg-control {
     background: $element-color-darkest;
+    border-color: 1px solid $main-color-darkest;
+    box-shadow: 0 0 1px $main-color-darkest;
+
+    &:hover {
+      border-color: $secondary-color-lightest;
+    }
   }
 
   .css-26l3qy-menu {
     background: $element-color-lightest;
+    color: $white;
+
+    .css-9gakcf-option {
+      background-color: $basic-color;
+      color: $text-color;
+    }
+
+    .css-1n7v3ny-option {
+      background-color: $basic-color-lightest;
+      color: $white;
+    }
+
+    .css-yt9ioa-option {
+      color: $white;
+    }
   }
 }

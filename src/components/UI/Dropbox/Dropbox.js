@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Dropzone from 'react-dropzone';
 import { Controller } from 'react-hook-form';
 
+import { LanguageContext } from '@src/shared/context';
+
 const Dropbox = ({ control, name, errors, errorsMessage }) => {
+  const resources = useContext(LanguageContext);
+
   return (
     <Controller
       control={control}
@@ -14,7 +18,7 @@ const Dropbox = ({ control, name, errors, errorsMessage }) => {
             {({ getRootProps, getInputProps }) => (
               <div className="dropbox" {...getRootProps()}>
                 <input {...getInputProps()} name={name} onBlur={onBlur} />
-                <p>Drag & drop files here, or click to select files. (Max size 100kb)</p>
+                <p>{resources.dropbox_desc}</p>
               </div>
             )}
           </Dropzone>
