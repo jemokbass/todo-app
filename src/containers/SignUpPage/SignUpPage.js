@@ -1,8 +1,8 @@
-import React, { memo, useContext, useState } from 'react';
+import React, { memo, useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaSignUp } from '@src/shared/schema';
+import { schemaSignUpEn, schemaSignUpRu } from '@src/shared/schema';
 import parsePhoneNumberFromString from 'libphonenumber-js';
 
 import Input from '@src/components/UI/Input/Input';
@@ -17,11 +17,12 @@ const SignUpPage = props => {
   const error = useSelector(state => state.auth.error);
   const dispatch = useDispatch();
   const submitForm = (info, auth) => dispatch(signUp(info, auth));
+  const language = useSelector(state => state.options.language);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: 'onBlur', resolver: yupResolver(schemaSignUp) });
+  } = useForm({ mode: 'onBlur', resolver: yupResolver(language === 'en' ? schemaSignUpEn : schemaSignUpRu) });
   const [successfulSubmit, setSuccessfulSubmit] = useState(false);
   const resources = useContext(LanguageContext);
 
@@ -47,6 +48,8 @@ const SignUpPage = props => {
       setTimeout(() => setSuccessfulSubmit(true), 3000);
     }
   };
+
+  useEffect(() => {}, [language]);
 
   return (
     <div className="sign-up-page">

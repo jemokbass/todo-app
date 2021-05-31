@@ -1,9 +1,9 @@
-import React, { memo, useContext } from 'react';
+import React, { memo, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaOptions } from '@src/shared/schema';
+import { schemaOptionsEn, schemaOptionsRu } from '@src/shared/schema';
 
 import Button from '@src/components/UI/Button/Button';
 import Input from '@src/components/UI/Input/Input';
@@ -28,6 +28,7 @@ const OptionsPage = () => {
   const submitAvatar = (data, uid) => dispatch(changeAvatar(data, uid));
   const changeCurrentPassword = data => dispatch(changePassword(data));
   const deleteAvatarAction = (uid, userInfo, userKey) => dispatch(deleteAvatar(uid, userInfo, userKey));
+  const language = useSelector(state => state.options.language);
   const {
     register,
     handleSubmit,
@@ -35,7 +36,10 @@ const OptionsPage = () => {
     watch,
     reset,
     formState: { errors },
-  } = useForm({ mode: 'onBlur', resolver: yupResolver(schemaOptions) });
+  } = useForm({
+    mode: 'onBlur',
+    resolver: yupResolver(language === 'en' ? schemaOptionsEn : schemaOptionsRu),
+  });
   const withPassword = watch('withPassword');
   const resources = useContext(LanguageContext);
 
@@ -86,6 +90,8 @@ const OptionsPage = () => {
   ) : (
     <Dropbox name="avatar" control={control} />
   );
+
+  useEffect(() => {}, [language]);
 
   return (
     <div className="options-page">

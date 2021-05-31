@@ -1,9 +1,9 @@
-import React, { memo, useContext } from 'react';
+import React, { memo, useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useHistory } from 'react-router';
-import { schemaNewTodo } from '@src/shared/schema';
+import { schemaNewTodoEn, schemaNewTodoRu } from '@src/shared/schema';
 
 import Input from '@src/components/UI/Input/Input';
 import Textarea from '@src/components/UI/Textarea/Textarea';
@@ -20,12 +20,16 @@ const NewTodoPage = () => {
   const dispatch = useDispatch();
   const submitTodo = newTodo => dispatch(todoSubmit(newTodo));
   const history = useHistory();
+  const language = useSelector(state => state.options.language);
   const {
     reset,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: 'onBlur', resolver: yupResolver(schemaNewTodo) });
+  } = useForm({
+    mode: 'onBlur',
+    resolver: yupResolver(language === 'en' ? schemaNewTodoEn : schemaNewTodoRu),
+  });
   const resources = useContext(LanguageContext);
 
   const submitTodoHandler = data => {
@@ -37,6 +41,8 @@ const NewTodoPage = () => {
       history.push('/todo-list');
     }
   };
+
+  useEffect(() => {}, [language]);
 
   return (
     <div className="new-todo-page">

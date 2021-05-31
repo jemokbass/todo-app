@@ -14,6 +14,7 @@
   --element-color: #be6f73;
   --element-color-darkest: #854d50;
   --element-color-lightest: #d19a9d;
+  --error-color: #ff4c4c;
 
   .dark {
     --basic-color: #0e1111;
@@ -57,3 +58,4 @@ $text-color-lightest: var(--text-color-lightest);
 $element-color: var(--element-color);
 $element-color-darkest: var(--element-color-darkest);
 $element-color-lightest: var(--element-color-lightest);
+$error-color: var(--error-color);

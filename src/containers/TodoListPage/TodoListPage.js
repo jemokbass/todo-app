@@ -36,10 +36,6 @@ const TodoListPage = props => {
 
   let fetchedTodoList = <p className="todo-list-page__desc">{resources.todo_list_empty}</p>;
 
-  if (searchValue) {
-    currentTodoList = todoList.filter(item => item[1].title.indexOf(searchValue) !== -1);
-  }
-
   if (sortListAZ) {
     currentTodoList = sortArrAZ(todoList);
   }
@@ -54,6 +50,10 @@ const TodoListPage = props => {
 
   if (favList) {
     currentTodoList = todoList.filter(item => item[1].favorite !== false);
+  }
+
+  if (searchValue) {
+    currentTodoList = todoList.filter(item => item[1].title.indexOf(searchValue) !== -1);
   }
 
   if (todoList && !loading && !error && todoList.length > 0) {

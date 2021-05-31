@@ -1,9 +1,9 @@
-import React, { memo, useContext } from 'react';
+import React, { memo, useContext, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Redirect } from 'react-router';
-import { schemaSignIn } from '@src/shared/schema';
+import { schemaSignInEn, schemaSignInRu } from '@src/shared/schema';
 
 import Input from '@src/components/UI/Input/Input';
 import Button from '@src/components/UI/Button/Button';
@@ -15,18 +15,21 @@ const SignInPage = props => {
   const loading = useSelector(state => state.auth.loading);
   const error = useSelector(state => state.auth.error);
   const isAuth = useSelector(state => state.auth.isAuth);
+  const language = useSelector(state => state.options.language);
   const dispatch = useDispatch();
   const submitForm = auth => dispatch(signIn(auth));
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: 'onBlur', resolver: yupResolver(schemaSignIn) });
+  } = useForm({ mode: 'onBlur', resolver: yupResolver(language === 'en' ? schemaSignInEn : schemaSignInRu) });
   const resources = useContext(LanguageContext);
 
   const submitSignInHandler = data => {
     submitForm(data);
   };
+
+  useEffect(() => {}, [language]);
 
   return (
     <div className="sign-in-page">

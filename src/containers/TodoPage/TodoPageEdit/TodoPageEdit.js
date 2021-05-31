@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { schemaNewTodo } from '@src/shared/schema';
+import { schemaNewTodoEn, schemaNewTodoRu } from '@src/shared/schema';
 
 import Input from '@src/components/UI/Input/Input';
 import Textarea from '@src/components/UI/Textarea/Textarea';
@@ -15,13 +15,14 @@ import { LanguageContext } from '@src/shared/context';
 const TodoPageEdit = props => {
   const { todo } = props;
   const id = props.id;
+  const language = useSelector(state => state.options.language);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     mode: 'onBlur',
-    resolver: yupResolver(schemaNewTodo),
+    resolver: yupResolver(language === 'en' ? schemaNewTodoEn : schemaNewTodoRu),
     defaultValues: { title: todo.title, text: todo.text, favorite: todo.favorite },
   });
   const dispatch = useDispatch();
@@ -33,6 +34,8 @@ const TodoPageEdit = props => {
   const editTodoHandler = data => {
     changeTodoData(id, data);
   };
+
+  useEffect(() => {}, [language]);
 
   return (
     <form onSubmit={handleSubmit(editTodoHandler)}>
