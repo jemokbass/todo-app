@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dropbox UI component Should render snapshots Should render empty dropbox snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="dropbox"
+    tabindex="0"
+  >
+    <input
+      autocomplete="off"
+      multiple=""
+      name="mock"
+      style="display: none;"
+      tabindex="-1"
+      type="file"
+    />
+    <p />
+  </div>
+  <ul
+    class="dropbox-list"
+  />
+</DocumentFragment>
+`;
