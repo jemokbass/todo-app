@@ -14,7 +14,7 @@ import { LanguageContext } from '@src/shared/context';
 
 const SignUpPage = props => {
   const loading = useSelector(state => state.auth.loading);
-  const error = useSelector(state => state.auth.error);
+  const error = useSelector(state => state.auth.regError);
   const dispatch = useDispatch();
   const submitForm = (info, auth) => dispatch(signUp(info, auth));
   const language = useSelector(state => state.options.language);
@@ -90,10 +90,10 @@ const SignUpPage = props => {
           {...register('phone')}
         />
         {loading && <Loader />}
-        <Button type="submit" disabled={loading || error}>
+        <Button type="submit" disabled={loading}>
           {resources.sign_up_button}
         </Button>
-        {error && <p>{error.message}</p>}
+        {error && <p className="error">{error.message}</p>}
       </form>
       {successfulSubmit && <Redirect to="/sign-in" />}
     </div>

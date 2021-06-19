@@ -11,7 +11,7 @@ import * as resources from '@src/assets/localize/resources.json';
 
 const App = props => {
   const isGetResponse = useSelector(state => state.auth.getResponse);
-  const error = useSelector(state => state.auth.error);
+  const error = useSelector(state => state.auth.authError);
   const language = useSelector(state => state.options.language);
   const dispatch = useDispatch();
   const isComplete = useSelector(state => state.options.isComplete);

@@ -20,8 +20,10 @@ export const CHANGE_TODO_START = 'CHANGE_TODO_START';
 export const CHANGE_TODO_SUCCESS = 'CHANGE_TODO_SUCCESS';
 export const CHANGE_TODO_ERROR = 'CHANGE_TODO_ERROR';
 
-export const AUTH_START = 'SIGN_START';
-export const AUTH_ERROR = 'SIGN_ERROR';
+export const AUTH_START = 'AUTH_START';
+export const AUTH_ERROR = 'AUTH_ERROR';
+export const REGISTER_ERROR = 'REGISTER_ERROR';
+export const CHECK_LOGIN_ERROR = 'SIGN_ERROR';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const LOGOUT = 'LOGOUT';

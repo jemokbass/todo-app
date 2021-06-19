@@ -25,6 +25,7 @@ const Routes = props => {
         <Route path="/options" component={lazyLoad.optionsPage} />
         <Route path="/logout" component={lazyLoad.logout} />
         <Route path="/todo/:id" component={lazyLoad.todoPage} />
+        <Route exact path="/sign-in" component={lazyLoad.singInPage} />
       </>
     );
   }

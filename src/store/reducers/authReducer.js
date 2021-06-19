@@ -6,6 +6,8 @@ const initialState = {
   token: null,
   id: null,
   isAuth: false,
+  authError: null,
+  regError: null,
   successfulSignUp: false,
   userInfo: null,
   getResponse: true,
@@ -16,13 +18,25 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
-      return { ...state, loading: true };
+      return { ...state, loading: true, regError: null, authError: null, error: null };
     case actionTypes.SIGN_IN_SUCCESS:
-      return { ...state, error: null, loading: false, token: action.token, id: action.id, isAuth: true };
+      return {
+        ...state,
+        error: null,
+        regError: null,
+        loading: false,
+        token: action.token,
+        id: action.id,
+        isAuth: true,
+      };
     case actionTypes.SIGN_UP_SUCCESS:
-      return { ...state, error: null, loading: false, successfulSignUp: true };
+      return { ...state, error: null, regError: null, loading: false, successfulSignUp: true };
     case actionTypes.AUTH_ERROR:
       return { ...state, error: action.error, loading: false };
+    case actionTypes.REGISTER_ERROR:
+      return { ...state, regError: action.error, loading: false };
+    case actionTypes.CHECK_LOGIN_ERROR:
+      return { ...state, authError: action.error, loading: false };
     case actionTypes.START_INFO_RESPONSE:
       return { ...state, getResponse: true };
     case actionTypes.LOGOUT:

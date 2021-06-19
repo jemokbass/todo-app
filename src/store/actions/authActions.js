@@ -20,6 +20,16 @@ export const authError = error => ({
   error,
 });
 
+export const regError = error => ({
+  type: actionTypes.REGISTER_ERROR,
+  error,
+});
+
+export const checkLoginError = error => ({
+  type: actionTypes.CHECK_LOGIN_ERROR,
+  error,
+});
+
 export const getUserInfo = info => ({
   type: actionTypes.GET_USER_INFO,
   info,
@@ -42,10 +52,10 @@ export const signUp = (info, auth) => dispatch => {
         .ref('/users')
         .push(info)
         .then(result => dispatch(signUpSuccess()))
-        .catch(err => dispatch(authError(err)));
+        .catch(err => dispatch(regError(err)));
     })
     .catch(err => {
-      dispatch(authError(err));
+      dispatch(regError(err));
     });
 };
 

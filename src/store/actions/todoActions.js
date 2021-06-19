@@ -120,7 +120,7 @@ export const getTodo = id => dispatch => {
     .then(result => {
       dispatch(getTodoSuccess(result.toJSON()));
     })
-    .catch(error => getTodoError(error));
+    .catch(error => dispatch(getTodoError(error)));
 };
 
 export const removeTodoStart = () => ({

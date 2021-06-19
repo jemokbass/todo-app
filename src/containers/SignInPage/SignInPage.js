@@ -2,7 +2,7 @@ import React, { memo, useContext, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import { schemaSignInEn, schemaSignInRu } from '@src/shared/schema';
 
 import Input from '@src/components/UI/Input/Input';
@@ -27,6 +27,8 @@ const SignInPage = props => {
 
   const submitSignInHandler = data => {
     submitForm(data);
+    if (isAuth) {
+    }
   };
 
   useEffect(() => {}, [language]);
@@ -38,6 +40,7 @@ const SignInPage = props => {
         <Input
           label={resources.sign_in_mail}
           type="email"
+          autoComplete="on"
           errors={!!errors.email}
           errorsMessage={errors?.email?.message}
           placeholder="johnabrams@mail.com"
