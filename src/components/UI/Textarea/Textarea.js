@@ -13,6 +13,7 @@ const Textarea = forwardRef((props, ref) => {
     className,
     errors,
     errorsMessage,
+    placeholder,
   } = props;
   const textareaClassName = className ? ` ${className}` : '';
 
@@ -28,6 +29,7 @@ const Textarea = forwardRef((props, ref) => {
         onBlur={onBlur}
         disabled={disabled}
         name={name}
+        placeholder={placeholder}
       />
       {errors && <span className="input-field__error">{errorsMessage}</span>}
     </label>
@@ -42,6 +44,7 @@ Textarea.defaultProps = {
   autoCorrect: 'on',
   disabled: false,
   name: '',
+  placeholder: '',
 };
 
 Textarea.propTypes = {
@@ -53,6 +56,7 @@ Textarea.propTypes = {
   disabled: PropTypes.bool,
   name: PropTypes.string,
   value: PropTypes.string,
+  placeholder: PropTypes.string,
 };
 
 export default Textarea;

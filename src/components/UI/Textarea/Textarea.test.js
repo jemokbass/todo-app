@@ -1,11 +1,16 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import Textarea from './Textarea';
 
 describe('Textarea UI component', () => {
   it('Should render textarea component', () => {
     render(<Textarea />);
+  });
+
+  it('Should render disabled textarea component', () => {
+    render(<Textarea disabled placeholder="textarea" />);
+    expect(screen.getByPlaceholderText('textarea')).toBeDisabled();
   });
 
   describe('Should render snapshots', () => {
