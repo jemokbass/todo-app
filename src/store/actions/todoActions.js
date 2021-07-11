@@ -28,10 +28,10 @@ export const changeTodoSuccess = () => ({
   type: actionTypes.CHANGE_TODO_SUCCESS,
 });
 
-export const changeTodo = (id, data) => dispatch => {
+export const changeTodo = (id, data) => async dispatch => {
   dispatch(changeTodoStart());
 
-  app
+  await app
     .database()
     .ref('todo/' + id)
     .update(data)
@@ -51,10 +51,10 @@ export const todoPositionList = () => ({
   type: actionTypes.TODO_POSITION_LIST,
 });
 
-export const todoSubmit = newTodo => dispatch => {
+export const todoSubmit = newTodo => async dispatch => {
   dispatch(todoSubmitStart());
 
-  app
+  await app
     .database()
     .ref('/todo')
     .push(newTodo)
@@ -79,10 +79,10 @@ export const fetchTodoError = error => ({
   error,
 });
 
-export const fetchTodo = uid => dispatch => {
+export const fetchTodo = uid => async dispatch => {
   dispatch(fetchTodoStart());
 
-  app
+  await app
     .database()
     .ref('todo/')
     .orderByChild('uid')
@@ -110,10 +110,10 @@ export const getTodoError = error => ({
   error,
 });
 
-export const getTodo = id => dispatch => {
+export const getTodo = id => async dispatch => {
   dispatch(getTodoStart());
 
-  app
+  await app
     .database()
     .ref(`todo/${id}`)
     .get()
@@ -137,10 +137,10 @@ export const removeTodoError = error => ({
   error,
 });
 
-export const removeTodo = (id, cleanCurrentTodo) => dispatch => {
+export const removeTodo = (id, cleanCurrentTodo) => async dispatch => {
   dispatch(removeTodoStart());
 
-  app
+  await app
     .database()
     .ref('/todo')
     .child(`/${id}`)

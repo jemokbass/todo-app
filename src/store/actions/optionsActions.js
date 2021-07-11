@@ -20,10 +20,10 @@ export const changeOptionsSuccess = isComplete => ({
   isComplete,
 });
 
-export const changeInfo = (userKey, data) => dispatch => {
+export const changeInfo = (userKey, data) => async dispatch => {
   dispatch(changeOptionsStart());
 
-  app
+  await app
     .database()
     .ref(`users/${userKey}`)
     .update(data)
@@ -31,11 +31,11 @@ export const changeInfo = (userKey, data) => dispatch => {
     .catch(err => dispatch(changeOptionsError(err)));
 };
 
-export const changeAvatar = (data, uid) => dispatch => {
+export const changeAvatar = (data, uid) => async dispatch => {
   dispatch(changeOptionsStart());
   const avatar = data.avatar[0];
 
-  app
+  await app
     .storage()
     .ref(`images/${uid}/${avatar.name}`)
     .put(avatar)
@@ -43,10 +43,10 @@ export const changeAvatar = (data, uid) => dispatch => {
     .catch(err => dispatch(changeOptionsError(err)));
 };
 
-export const deleteAvatar = (uid, userInfo, userKey) => dispatch => {
+export const deleteAvatar = (uid, userInfo, userKey) => async dispatch => {
   dispatch(changeOptionsStart());
 
-  app
+  await app
     .storage()
     .ref(`images/${uid}/${userInfo.avatar}`)
     .delete()
@@ -59,11 +59,11 @@ export const deleteAvatar = (uid, userInfo, userKey) => dispatch => {
     .catch(err => dispatch(changeOptionsError(err)));
 };
 
-export const changePassword = data => dispatch => {
+export const changePassword = data => async dispatch => {
   dispatch(changeOptionsStart());
   const currentUser = app.auth().currentUser;
 
-  app
+  await app
     .auth()
     .signInWithEmailAndPassword(currentUser.email, data.oldPassword)
     .then(result => {

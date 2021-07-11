@@ -40,9 +40,9 @@ export const getAvatar = avatar => ({
   avatar,
 });
 
-export const signUp = (info, auth) => dispatch => {
+export const signUp = (info, auth) => async dispatch => {
   dispatch(authStart());
-  app
+  await app
     .auth()
     .createUserWithEmailAndPassword(auth.email, auth.password)
     .then(result => {
@@ -59,9 +59,9 @@ export const signUp = (info, auth) => dispatch => {
     });
 };
 
-export const signIn = auth => dispatch => {
+export const signIn = auth => async dispatch => {
   dispatch(authStart());
-  app
+  await app
     .auth()
     .signInWithEmailAndPassword(auth.email, auth.password)
     .then(result => {
@@ -112,7 +112,7 @@ export const startInfoResponse = () => ({
   type: actionTypes.START_INFO_RESPONSE,
 });
 
-export const checkLogin = () => dispatch => {
+export const checkLogin = () => async dispatch => {
   const token = localStorage.getItem('token');
   const id = localStorage.getItem('id');
   dispatch(startInfoResponse());
@@ -122,7 +122,7 @@ export const checkLogin = () => dispatch => {
   } else {
     dispatch(signInSuccess(token, id));
 
-    checkUserInfo()
+    await checkUserInfo()
       .then(res => {
         dispatch(getUserInfo(res));
         const avatar = res[Object.keys(res)[0]].avatar;
