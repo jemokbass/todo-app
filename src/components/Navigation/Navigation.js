@@ -61,16 +61,14 @@ const Navigation = props => {
   };
 
   return (
-    <div className="nav">
+    <nav className={`navigation${isMobile ? ' mobile' : ''}`} onClick={onClick}>
       <ReactSelect
         options={options}
         onChange={changeLanguageHandler}
         placeholder={resources.navigation_lang_placeholder}
       />
-      <nav className={`navigation${isMobile ? ' mobile' : ''}`} onClick={onClick}>
-        <ul>{navigationList}</ul>
-      </nav>
-    </div>
+      <ul>{navigationList}</ul>
+    </nav>
   );
 };
 

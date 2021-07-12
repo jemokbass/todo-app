@@ -12,7 +12,7 @@ import { signUp } from '@src/store/actions/authActions';
 import { Redirect } from 'react-router';
 import { LanguageContext } from '@src/shared/context';
 
-const SignUpPage = props => {
+const SignUpPage = () => {
   const loading = useSelector(state => state.auth.loading);
   const error = useSelector(state => state.auth.regError);
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const SignUpPage = props => {
   useEffect(() => {}, [language]);
 
   return (
-    <div className="sign-up-page">
+    <section className="sign-up-page">
       <h2 className="sign-up-page__title">{resources.sign_up_title}</h2>
       <form id="sign-up" className="sign-up-page__form" onSubmit={handleSubmit(submitSignUpHandler)}>
         <Input
@@ -96,7 +96,7 @@ const SignUpPage = props => {
         {error && <p className="error">{error.message}</p>}
       </form>
       {successfulSubmit && <Redirect to="/sign-in" />}
-    </div>
+    </section>
   );
 };
 

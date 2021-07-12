@@ -28,11 +28,19 @@
     .css-9gakcf-option {
       background-color: $basic-color;
       color: $text-color;
+
+      &:hover {
+        color: $black;
+      }
     }
 
     .css-1n7v3ny-option {
       background-color: $basic-color-lightest;
       color: $white;
+
+      &:hover {
+        color: $black;
+      }
     }
 
     .css-yt9ioa-option {

@@ -47,13 +47,13 @@ const TodoPage = props => {
   }
 
   return (
-    <div className="todo-page">
+    <section className="todo-page">
       <div className="todo-page__inner">
         {todoInfo}
         {loading && <Loader />}
         {error && <p className="error">{error.message}</p>}
       </div>
-    </div>
+    </section>
   );
 };
 

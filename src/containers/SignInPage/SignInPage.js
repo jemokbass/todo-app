@@ -11,7 +11,7 @@ import Loader from '@src/components/Loader/Loader';
 import { signIn } from '@src/store/actions/authActions';
 import { LanguageContext } from '@src/shared/context';
 
-const SignInPage = props => {
+const SignInPage = () => {
   const loading = useSelector(state => state.auth.loading);
   const error = useSelector(state => state.auth.error);
   const isAuth = useSelector(state => state.auth.isAuth);
@@ -34,7 +34,7 @@ const SignInPage = props => {
   useEffect(() => {}, [language]);
 
   return (
-    <div className="sign-in-page">
+    <section className="sign-in-page">
       <h2 className="sign-in-page__title">{resources.sign_in_title}</h2>
       <form id="sign-in" className="sign-in-page__form" onSubmit={handleSubmit(submitSignInHandler)}>
         <Input
@@ -61,7 +61,7 @@ const SignInPage = props => {
         {error && <p className="error">{error.message}</p>}
       </form>
       {isAuth && <Redirect to="/" />}
-    </div>
+    </section>
   );
 };
 

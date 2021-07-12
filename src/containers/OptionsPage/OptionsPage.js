@@ -94,7 +94,7 @@ const OptionsPage = () => {
   useEffect(() => {}, [language]);
 
   return (
-    <div className="options-page">
+    <section className="options-page">
       <h2 className="options-page__title">{resources.options_title}</h2>
       <form className="options-page__form" onSubmit={handleSubmit(submitOptionsHandler)}>
         <Button className="options-page__form-button" onClick={() => history.goBack()}>
@@ -138,7 +138,7 @@ const OptionsPage = () => {
         </Button>
         {error && <p>error.message</p>}
       </form>
-    </div>
+    </section>
   );
 };
 

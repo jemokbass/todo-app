@@ -6,7 +6,7 @@ import HomePage from '@src/containers/HomePage/HomePage';
 import lazyLoad from '../lazyLoad/lazyLoad';
 import { useSelector } from 'react-redux';
 
-const Routes = props => {
+const Routes = () => {
   const fallback = <Loader />;
   const isAuth = useSelector(state => state.auth.isAuth);
 
@@ -26,6 +26,7 @@ const Routes = props => {
         <Route path="/logout" component={lazyLoad.logout} />
         <Route path="/todo/:id" component={lazyLoad.todoPage} />
         <Route exact path="/sign-in" component={lazyLoad.singInPage} />
+        <Route path="/copyright" component={lazyLoad.copyrightPage} />
       </>
     );
   }

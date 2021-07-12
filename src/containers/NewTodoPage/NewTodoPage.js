@@ -45,7 +45,7 @@ const NewTodoPage = () => {
   useEffect(() => {}, [language]);
 
   return (
-    <div className="new-todo-page">
+    <section className="new-todo-page">
       <form className="container" onSubmit={handleSubmit(submitTodoHandler)}>
         <Input
           label={resources.new_todo_title}
@@ -67,7 +67,7 @@ const NewTodoPage = () => {
         </Button>
         {error && <p>{error.message}</p>}
       </form>
-    </div>
+    </section>
   );
 };
 

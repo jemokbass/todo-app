@@ -1,7 +1,15 @@
 {
   "en": {
     "homepage_title": "Welcome to the Todo App.",
-    "homepage_button": "Write First Todo",
+    "homepage_button_first": "Write First Todo",
+    "homepage_button": "Write Todo",
+    "homepage_list_title": "Abilities:",
+    "homepage_list_item_1": "Write a todo's",
+    "homepage_list_item_2": "Filter cases",
+    "homepage_list_item_3": "Make a favorites",
+    "homepage_list_item_4": "Change themes",
+    "homepage_list_item_5": "Change language",
+    "homepage_list_item_6": "Personal avatar",
     "navigation_home": "Home",
     "navigation_sign_in": "Sign In",
     "navigation_sign_up": "Sign Up",
@@ -43,11 +51,20 @@
     "options_new_password": "New Password",
     "options_change_password_checkbox": "Change password?",
     "options_save_changes": "Save changes",
-    "navigation_lang_placeholder": "lang"
+    "navigation_lang_placeholder": "lang",
+    "copyright_title": "Please, don't copy my app 😥"
   },
   "ru": {
     "homepage_title": "Добро пожаловать в Todo App.",
-    "homepage_button": "Запишите своё первое дело",
+    "homepage_button_first": "Записать своё первое дело",
+    "homepage_button": "Записать дело",
+    "homepage_list_title": "Возможности:",
+    "homepage_list_item_1": "Запись ваших дел",
+    "homepage_list_item_2": "Различные фильтры",
+    "homepage_list_item_3": "Избранные",
+    "homepage_list_item_4": "Изменение темы",
+    "homepage_list_item_5": "Изменение языка",
+    "homepage_list_item_6": "Личный аватар",
     "navigation_home": "Главная",
     "navigation_sign_in": "Войти",
     "navigation_sign_up": "Регистрация",
@@ -89,6 +106,7 @@
     "options_new_password": "Новый Пароль",
     "options_change_password_checkbox": "Изменить пароль?",
     "options_save_changes": "Сохранить изменения",
-    "navigation_lang_placeholder": "язык"
+    "navigation_lang_placeholder": "язык",
+    "copyright_title": "Не копируйте моё приложение, пожалуйста 😥"
   }
 }

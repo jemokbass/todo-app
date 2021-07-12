@@ -12,7 +12,7 @@ import { sortArrAZ, sortArrZA } from '@src/shared/utility';
 import TodoListSort from './TodoListSort/TodoListSort';
 import { LanguageContext } from '@src/shared/context';
 
-const TodoListPage = props => {
+const TodoListPage = () => {
   const loading = useSelector(state => state.todo.fetchLoading);
   const error = useSelector(state => state.todo.fetchError);
   const todoList = useSelector(state => state.todo.allTodo);
@@ -85,7 +85,7 @@ const TodoListPage = props => {
   }
 
   return (
-    <div className="todo-list-page">
+    <section className="todo-list-page">
       <TodoListSort
         favList={favList}
         setFavList={setFavList}
@@ -119,7 +119,7 @@ const TodoListPage = props => {
         {loading ? <Loader /> : fetchedTodoList}
         {error && <p>{error.message}</p>}
       </div>
-    </div>
+    </section>
   );
 };
 

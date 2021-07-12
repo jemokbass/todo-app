@@ -1,4 +1,6 @@
 #root {
+  --black-color: #000000;
+  --white-color: #ffffff;
   --basic-color: #9e7965;
   --basic-color-darkest: #6e5446;
   --basic-color-lightest: #bba193;
@@ -17,6 +19,8 @@
   --error-color: #ff4c4c;
 
   .dark {
+    --black-color: #ffffff;
+    --white-color: #000000;
     --basic-color: #0e1111;
     --basic-color-darkest: #565858;
     --basic-color-lightest: #090b0b;
@@ -41,8 +45,8 @@
   }
 }
 
-$black: #000000;
-$white: #ffffff;
+$black: var(--black-color);
+$white: var(--white-color);
 $basic-color: var(--basic-color);
 $basic-color-darkest: var(--basic-color-darkest);
 $basic-color-lightest: var(--basic-color-lightest);
