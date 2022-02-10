@@ -1,0 +1,92 @@
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80px;
+
+  &__inner {
+    position: relative;
+  }
+
+  &__out {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    animation: loading-out 1.2s infinite;
+
+    path {
+      fill: $basic-color;
+      animation: loading-color 1.2s infinite;
+    }
+
+    ellipse {
+      fill: $main-color-darkest;
+      animation: loading-ellipse 1.2s infinite;
+    }
+  }
+}
+
+@keyframes loading-out {
+  0% {
+    transform: translate(-50%, -50%) rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(1800deg);
+  }
+}
+
+@keyframes loading-color {
+  0% {
+    fill: $main-color;
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  25% {
+    fill: $main-color-lightest;
+  }
+
+  50% {
+    fill: $secondary-color;
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  75% {
+    fill: $secondary-color-lightest;
+  }
+
+  100% {
+    fill: $basic-color-lightest;
+  }
+}
+
+@keyframes loading-ellipse {
+  0% {
+    fill: $main-color-darkest;
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  25% {
+    fill: $main-color;
+  }
+
+  50% {
+    fill: $secondary-color;
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  75% {
+    fill: $secondary-color-lightest;
+  }
+
+  100% {
+    fill: $basic-color-lightest;
+  }
+}

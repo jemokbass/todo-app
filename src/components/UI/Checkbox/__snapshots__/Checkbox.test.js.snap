@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox component Should render snapshots Should render empty snapshot checkbox 1`] = `
+<DocumentFragment>
+  <div
+    class="check"
+  >
+    <div
+      class="check-input"
+    >
+      <input
+        class="checkbox"
+        name=""
+        type="checkbox"
+      />
+      <svg
+        class="check-input__icon"
+      >
+        check.svg
+      </svg>
+    </div>
+    <p
+      class="check__title"
+    />
+  </div>
+</DocumentFragment>
+`;

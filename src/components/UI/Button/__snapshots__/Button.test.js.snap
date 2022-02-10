@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button UI component Should render snapshots Should render snapshot button with text Win 1`] = `
+<DocumentFragment>
+  <button
+    class="button"
+    type="button"
+  >
+    Win
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button UI component Should render snapshots Should render snapshot disabled button 1`] = `
+<DocumentFragment>
+  <button
+    class="button"
+    disabled=""
+    type="button"
+  />
+</DocumentFragment>
+`;
+
+exports[`Button UI component Should render snapshots Should render snapshot empty button 1`] = `
+<DocumentFragment>
+  <button
+    class="button"
+    type="button"
+  />
+</DocumentFragment>
+`;

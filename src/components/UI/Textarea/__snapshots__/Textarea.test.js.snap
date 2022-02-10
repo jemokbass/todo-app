@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Textarea UI component Should render snapshots Should render disabled textarea snapshot 1`] = `
+<DocumentFragment>
+  <label
+    class="label textarea-field"
+  >
+    <span
+      class="textarea-field__label"
+    />
+    <textarea
+      autocomplete="on"
+      autocorrect="on"
+      class="textarea"
+      disabled=""
+      name=""
+      placeholder=""
+    />
+  </label>
+</DocumentFragment>
+`;
+
+exports[`Textarea UI component Should render snapshots Should render empty textarea snapshot 1`] = `
+<DocumentFragment>
+  <label
+    class="label textarea-field"
+  >
+    <span
+      class="textarea-field__label"
+    />
+    <textarea
+      autocomplete="on"
+      autocorrect="on"
+      class="textarea"
+      name=""
+      placeholder=""
+    />
+  </label>
+</DocumentFragment>
+`;

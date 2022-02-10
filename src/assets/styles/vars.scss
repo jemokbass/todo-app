@@ -1,0 +1,65 @@
+#root {
+  --black-color: #000000;
+  --white-color: #ffffff;
+  --basic-color: #9e7965;
+  --basic-color-darkest: #6e5446;
+  --basic-color-lightest: #bba193;
+  --main-color: #381614;
+  --main-color-darkest: #2c1110;
+  --main-color-lightest: #5f4442;
+  --secondary-color: #651c25;
+  --secondary-color-darkest: #50161d;
+  --secondary-color-lightest: #834950;
+  --text-color: #e0a092;
+  --text-color-darkest: #9c7066;
+  --text-color-lightest: #e9bcb2;
+  --element-color: #be6f73;
+  --element-color-darkest: #854d50;
+  --element-color-lightest: #d19a9d;
+  --error-color: #ff4c4c;
+
+  .dark {
+    --black-color: #ffffff;
+    --white-color: #000000;
+    --basic-color: #0e1111;
+    --basic-color-darkest: #565858;
+    --basic-color-lightest: #090b0b;
+    --main-color: #7b7f7f;
+    --main-color-darkest: #656a6a;
+    --main-color-lightest: #181e1e;
+    --secondary-color: #353839;
+    --secondary-color-darkest: #717374;
+    --secondary-color-lightest: #252727;
+    --text-color: #9da1a5;
+    --text-color-darkest: #656a6a;
+    --text-color-lightest: #a0a4a5;
+    --element-color: #414a4c;
+    --element-color-darkest: #7a8081;
+    --element-color-lightest: #2d3335;
+
+    .input,
+    .textarea {
+      color: var(--text-color);
+      background: var(--element-color-lightest);
+    }
+  }
+}
+
+$black: var(--black-color);
+$white: var(--white-color);
+$basic-color: var(--basic-color);
+$basic-color-darkest: var(--basic-color-darkest);
+$basic-color-lightest: var(--basic-color-lightest);
+$main-color: var(--main-color);
+$main-color-darkest: var(--main-color-darkest);
+$main-color-lightest: var(--main-color-lightest);
+$secondary-color: var(--secondary-color);
+$secondary-color-darkest: var(--secondary-color-darkest);
+$secondary-color-lightest: var(--secondary-color-lightest);
+$text-color: var(--text-color);
+$text-color-darkest: var(--text-color-darkest);
+$text-color-lightest: var(--text-color-lightest);
+$element-color: var(--element-color);
+$element-color-darkest: var(--element-color-darkest);
+$element-color-lightest: var(--element-color-lightest);
+$error-color: var(--error-color);

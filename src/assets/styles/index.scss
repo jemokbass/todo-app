@@ -1,2 +1,35 @@
+@import './fonts';
 @import './vars';
 @import './main';
+
+//BLOCKS
+@import '../../components/Layout/Header/Header';
+@import '../../components/Layout/Footer/Footer';
+@import '../../components/Navigation/NavigationItem/NavigationItem';
+@import '../../containers/TodoListPage/TodoListItem/TodoListItem';
+@import '../../components/Layout/Header/HeaderBurger/HeaderBurger';
+@import '../../containers/TodoListPage/TodoListSort/TodoListSort';
+
+//COMPONENTS
+@import '../../components/Layout/Layout';
+@import '../../components/Logo/Logo';
+@import '../../components/Navigation/Navigation';
+@import '../../components/Loader/Loader';
+
+//CONTAINERS
+@import '../../containers/HomePage/HomePage';
+@import '../../containers/SignInPage/SignInPage';
+@import '../../containers/SignUpPage/SignUpPage';
+@import '../../containers/NewTodoPage/NewTodoPage';
+@import '../../containers/TodoListPage/TodoListPage';
+@import '../../containers/OptionsPage/OptionsPage';
+@import '../../containers/TodoPage/TodoPage';
+@import '../../containers/CopyrightPage/CopyrightPage';
+
+//UI
+@import '../../components/UI/Button/Button';
+@import '../../components/UI/Input/Input';
+@import '../../components/UI/Textarea/Textarea';
+@import '../../components/UI/Dropbox/Dropbox';
+@import '../../components/UI/Checkbox/Checkbox';
+@import '../../components/UI/Select/Select';

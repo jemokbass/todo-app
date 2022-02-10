@@ -1,0 +1,16 @@
+.logo {
+  height: 40px;
+
+  svg {
+    display: inline-block;
+    height: 40px;
+
+    rect {
+      stroke: $secondary-color;
+
+      &:first-child {
+        fill: $secondary-color-lightest;
+      }
+    }
+  }
+}

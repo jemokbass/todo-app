@@ -1,0 +1,21 @@
+.input-field {
+  display: block;
+  margin: 0 0 10px;
+
+  &__label {
+    display: block;
+    font-size: 22px;
+  }
+
+  .input {
+    margin: 0 0 5px;
+  }
+
+  .input[disabled] {
+    opacity: 0.6;
+  }
+
+  &__error {
+    color: $error-color;
+  }
+}

@@ -1,0 +1,27 @@
+.button {
+  display: block;
+  width: 100%;
+  padding: 10px 24px;
+  font-weight: 700;
+  font-size: 18px;
+  color: $main-color;
+  background: $element-color-lightest;
+  border: $secondary-color;
+  cursor: pointer;
+  transition: all 0.5s ease 0s;
+
+  &:hover {
+    color: $text-color;
+    background: $element-color-darkest;
+  }
+}
+
+.button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+
+  &:hover {
+    color: $main-color;
+    background: $element-color-lightest;
+  }
+}

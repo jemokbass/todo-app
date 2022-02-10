@@ -1,0 +1,47 @@
+.todo-page {
+  padding: 30px 0;
+
+  &__inner {
+    position: relative;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    background: $main-color-lightest;
+    box-shadow: -2px 2px 0 $secondary-color-lightest;
+    border-radius: 10px;
+  }
+
+  &__title {
+    margin: 0 0 15px;
+    font-size: 26px;
+    color: $element-color;
+  }
+
+  &__text {
+    margin: 0 0 20px;
+    font-size: 18px;
+  }
+
+  &__button {
+    max-width: 200px;
+    margin: 0 auto;
+    border-radius: 10px;
+  }
+
+  &__change-button.button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    max-width: 100px;
+    font-size: 14px;
+  }
+
+  &__star {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+  }
+}
